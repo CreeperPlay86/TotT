@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
 		}
 		if(player.isGrounded)
 			{
-				move_Direction = new Vector3(x_Move, 0f, z_Move);
+				move_Direction = new Vector3(x_Move, 0f, z_Move).normalized;
 				move_Direction = transform.TransformDirection(move_Direction);
 				if(Input.GetKey(KeyCode.Space))
 				{
