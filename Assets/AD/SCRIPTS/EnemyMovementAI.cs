@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class EnemyMovementAI : MonoBehaviour
 {
@@ -22,6 +23,12 @@ public class EnemyMovementAI : MonoBehaviour
 
         #region UI
             public GameObject btnLoad;
+
+            public Text textWinOrLoose;
+        #endregion
+
+        #region BOOL
+            public bool isGoActiveBtn;
         #endregion
     #endregion
 
@@ -34,11 +41,14 @@ public class EnemyMovementAI : MonoBehaviour
 
     void Update()
     {
-        Vector3 direction = Player.position - transform.position;
-        Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
-        transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
-        agent.SetDestination(Player.position); 
-        agent.speed = 5;
+        if(!isGoActiveBtn)
+        {
+            Vector3 direction = Player.position - transform.position;
+            Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
+            transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
+            agent.SetDestination(Player.position); 
+            agent.speed = 4.8f;
+        }
     }
 
     void FixedUpdate()
@@ -46,9 +56,26 @@ public class EnemyMovementAI : MonoBehaviour
         distanceToPlayer = Vector3.Distance(transform.position, Player.position);
         if(distanceToPlayer <= 0.95f)
         {
+            isGoActiveBtn = true;
+            textWinOrLoose.text = "ПРОИГРЫШ!";
+            textWinOrLoose.GetComponent<Text>().color = new Color(1,0,0,aColorImg);
+        }
+
+        if(isGoActiveBtn)
+        {
+            Player.GetComponent<PlayerMovement>().enabled = false;
+            gameObject.GetComponent<NavMeshAgent>().enabled = false;
+
+            Cursor.lockState = CursorLockMode.None;
             btnLoad.SetActive(true);
+            btnLoad.GetComponent<Image>().color = new Color(1,1,1,0.98f);
             aColorImg += (Time.deltaTime * 0.5f);
             btnLoad.GetComponent<Image>().color = new Color(1,1,1,aColorImg);
+            if(aColorImg >= 1)
+            {
+                gameObject.GetComponent<EnemyMovementAI>().enabled = false;
+            }   
+
         }
     }
 }

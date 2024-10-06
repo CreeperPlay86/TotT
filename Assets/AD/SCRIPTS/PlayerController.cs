@@ -13,6 +13,18 @@ public class PlayerController : MonoBehaviour
 
         #region  UI
             public Text textNumberIdol;
+
+            public GameObject bar;
+        #endregion
+
+        #region GAME OBJECTS
+            public GameObject PS;
+        #endregion
+
+        #region FLOAT
+            public float xPos;
+            public float yPos;
+            public float zPos;
         #endregion
     #endregion
 
@@ -22,9 +34,15 @@ public class PlayerController : MonoBehaviour
     {
         if(obj.gameObject.tag == "IDOL")
         {
-            currentIdol++;
-            textNumberIdol.text = "Собрано " + currentIdol + "/7";
             Destroy(obj.gameObject);
+            currentIdol++;
+            textNumberIdol.text = currentIdol + "/7";
+            if(currentIdol == 1)
+            {
+                enemy.SetActive(true);
+            }
+            PS.SetActive(true);
+            PS.GetComponent<ParticleSystem>().go();
         }
     }
 
@@ -34,6 +52,8 @@ public class PlayerController : MonoBehaviour
                 public GameObject[] allIdol;
 
                 public GameObject currentIdolObj;
+
+                public GameObject enemy;
             #endregion
 
             #region TRANSFORM
@@ -66,6 +86,8 @@ public class PlayerController : MonoBehaviour
         {
             //if(!goCurrentDistanceToIdol)
             //    goMinDistanceKompace();
+
+            bar.GetComponent<Image>().fillAmount = (currentIdol * 0.14f);
 
             currentIdolObj = allIdol[currentIdol];
             Vector3 direction = currentIdolObj.transform.position - transform.position;

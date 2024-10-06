@@ -28,12 +28,17 @@ public class PlayerMovement : MonoBehaviour
 
 		#region GAME OBJECTS || UI
 			public GameObject staminaBar;
+
+			public GameObject idle;
+			public GameObject run;
 		#endregion
 	#endregion
 
     void FixedUpdate()
     {
         Move();
+
+		Debug.Log("не ломай компас :'( ");
     }
 
     void Start()
@@ -49,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
 
 		if(x_Move != 0 || z_Move != 0)
 		{
+			run.SetActive(true);
+			idle.SetActive(false);
 			if(!Input.GetKey(KeyCode.LeftShift))
 			{
 				//if(player.isGrounded)
@@ -57,11 +64,13 @@ public class PlayerMovement : MonoBehaviour
 				//	audioStep.SetActive(false);
 				
 			}
-			else
-				audioStep.SetActive(false);
+			//else
+				//audioStep.SetActive(false);
 		}
 		else
 		{
+			run.SetActive(false);
+			idle.SetActive(true);
 			//audioStep.SetActive(false);
 			//audioRun.SetActive(false);
 		}
