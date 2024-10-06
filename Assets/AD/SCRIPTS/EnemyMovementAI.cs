@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyMovementAI : MonoBehaviour
 {
@@ -11,6 +12,16 @@ public class EnemyMovementAI : MonoBehaviour
 
         #region TRANSFORMS
             public Transform Player;
+        #endregion
+        
+        #region FLOAT
+            public float distanceToPlayer;
+
+            float aColorImg;
+        #endregion
+
+        #region UI
+            public GameObject btnLoad;
         #endregion
     #endregion
 
@@ -28,5 +39,16 @@ public class EnemyMovementAI : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
         agent.SetDestination(Player.position); 
         agent.speed = 5;
+    }
+
+    void FixedUpdate()
+    {
+        distanceToPlayer = Vector3.Distance(transform.position, Player.position);
+        if(distanceToPlayer <= 0.95f)
+        {
+            btnLoad.SetActive(true);
+            aColorImg += (Time.deltaTime * 0.5f);
+            btnLoad.GetComponent<Image>().color = new Color(1,1,1,aColorImg);
+        }
     }
 }

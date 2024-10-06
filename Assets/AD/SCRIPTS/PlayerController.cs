@@ -64,77 +64,82 @@ public class PlayerController : MonoBehaviour
 
         void Update()
         {
-            if(!goCurrentDistanceToIdol)
-                goMinDistanceKompace();
-        }
+            //if(!goCurrentDistanceToIdol)
+            //    goMinDistanceKompace();
 
-
-        void goMinDistanceKompace()
-        {
-            if(allIdol[0] == null && allIdol[1] == null && allIdol[2] == null && allIdol[3] == null && allIdol[4] == null && allIdol[5] == null && allIdol[6] == null)
-                return;
-            goCurrentDistanceToIdol = true;
-            if(allIdol[numberIdol] != null)
-            {distanceToIdol = Vector3.Distance(transform.position, allIdol[numberIdol].transform.position);
-            allDistanceIdol.Add(distanceToIdol);
-            idolObject.Add(allIdol[numberIdol]);
-            }
-            numberIdol++;
-            
-            if(allIdol[numberIdol] != null)
-            {distanceToIdol = Vector3.Distance(transform.position, allIdol[numberIdol].transform.position);
-            allDistanceIdol.Add(distanceToIdol);
-            idolObject.Add(allIdol[numberIdol]);
-            }
-            numberIdol++;
-
-            if(allIdol[numberIdol] != null)
-            {distanceToIdol = Vector3.Distance(transform.position, allIdol[numberIdol].transform.position);
-            allDistanceIdol.Add(distanceToIdol);
-            idolObject.Add(allIdol[numberIdol]);
-            }
-            numberIdol++;
-
-            if(allIdol[numberIdol] != null)
-            {distanceToIdol = Vector3.Distance(transform.position, allIdol[numberIdol].transform.position);
-            allDistanceIdol.Add(distanceToIdol);
-            idolObject.Add(allIdol[numberIdol]);
-            }
-            numberIdol++;
-
-            if(allIdol[numberIdol] != null)
-            {distanceToIdol = Vector3.Distance(transform.position, allIdol[numberIdol].transform.position);
-            allDistanceIdol.Add(distanceToIdol);
-            idolObject.Add(allIdol[numberIdol]);
-            }
-            numberIdol++;
-
-            if(allIdol[numberIdol] != null)
-            {distanceToIdol = Vector3.Distance(transform.position, allIdol[numberIdol].transform.position);
-            allDistanceIdol.Add(distanceToIdol);
-            idolObject.Add(allIdol[numberIdol]);
-            }
-            numberIdol++;
-
-            if(allIdol[numberIdol] != null)
-            {distanceToIdol = Vector3.Distance(transform.position, allIdol[numberIdol].transform.position);
-            allDistanceIdol.Add(distanceToIdol);
-            idolObject.Add(allIdol[numberIdol]);
-            }
-            numberIdol=0;
-
-            minDistanceToIdol = allDistanceIdol.Min();
-            indexMinDistance = allDistanceIdol.IndexOf(minDistanceToIdol);
-            currentIdolObj = idolObject[indexMinDistance];
-
+            currentIdolObj = allIdol[currentIdol];
             Vector3 direction = currentIdolObj.transform.position - transform.position;
             Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
             arrowObj.transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
+        }
 
-            allDistanceIdol.Clear();
-            idolObject.Clear();
 
-            goCurrentDistanceToIdol = false;
-        }   
+        //void goMinDistanceKompace()
+        //{
+        //    if(allIdol[0] == null && allIdol[1] == null && allIdol[2] == null && allIdol[3] == null && allIdol[4] == null && allIdol[5] == null && allIdol[6] == null)
+        //        return;
+        //    goCurrentDistanceToIdol = true;
+        //    if(allIdol[numberIdol] != null)
+        //    {distanceToIdol = Vector3.Distance(transform.position, allIdol[numberIdol].transform.position);
+        //    allDistanceIdol.Add(distanceToIdol);
+        //    idolObject.Add(allIdol[numberIdol]);
+        //    }
+        //    numberIdol++;
+        //    
+        //    if(allIdol[numberIdol] != null)
+        //    {distanceToIdol = Vector3.Distance(transform.position, allIdol[numberIdol].transform.position);
+        //    allDistanceIdol.Add(distanceToIdol);
+        //    idolObject.Add(allIdol[numberIdol]);
+        //    }
+        //    numberIdol++;
+//
+        //    if(allIdol[numberIdol] != null)
+        //    {distanceToIdol = Vector3.Distance(transform.position, allIdol[numberIdol].transform.position);
+        //    allDistanceIdol.Add(distanceToIdol);
+        //    idolObject.Add(allIdol[numberIdol]);
+        //    }
+        //    numberIdol++;
+//
+        //    if(allIdol[numberIdol] != null)
+        //    {distanceToIdol = Vector3.Distance(transform.position, allIdol[numberIdol].transform.position);
+        //    allDistanceIdol.Add(distanceToIdol);
+        //    idolObject.Add(allIdol[numberIdol]);
+        //    }
+        //    numberIdol++;
+//
+        //    if(allIdol[numberIdol] != null)
+        //    {distanceToIdol = Vector3.Distance(transform.position, allIdol[numberIdol].transform.position);
+        //    allDistanceIdol.Add(distanceToIdol);
+        //    idolObject.Add(allIdol[numberIdol]);
+        //    }
+        //    numberIdol++;
+//
+        //    if(allIdol[numberIdol] != null)
+        //    {distanceToIdol = Vector3.Distance(transform.position, allIdol[numberIdol].transform.position);
+        //    allDistanceIdol.Add(distanceToIdol);
+        //    idolObject.Add(allIdol[numberIdol]);
+        //    }
+        //    numberIdol++;
+//
+        //    if(allIdol[numberIdol] != null)
+        //    {distanceToIdol = Vector3.Distance(transform.position, allIdol[numberIdol].transform.position);
+        //    allDistanceIdol.Add(distanceToIdol);
+        //    idolObject.Add(allIdol[numberIdol]);
+        //    }
+        //    numberIdol=0;
+//
+        //    minDistanceToIdol = allDistanceIdol.Min();
+        //    indexMinDistance = allDistanceIdol.IndexOf(minDistanceToIdol);
+        //    currentIdolObj = idolObject[indexMinDistance];
+//
+        //    Vector3 direction = currentIdolObj.transform.position - transform.position;
+        //    Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
+        //    arrowObj.transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
+//
+        //    allDistanceIdol.Clear();
+        //    idolObject.Clear();
+//
+        //    goCurrentDistanceToIdol = false;
+        //}   
     #endregion
 }
