@@ -5,11 +5,17 @@ TagManager:
   serializedVersion: 2
   tags:
   - IDOL
+  - Environment1
+  - carpet
+  - regionNoEffectCarpet
+  - stena
+  - floor
+  - stone
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - obj
   - Water
   - UI
   - 
