@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerControllerMain : MonoBehaviour
 {
@@ -98,6 +99,61 @@ public class PlayerControllerMain : MonoBehaviour
             if(hit.collider.tag == "fotoapparat")
             {
                 //clickLkmUI.SetActive(true);
+                if(Input.GetMouseButtonDown(0))
+                {
+                    inv.plusObj();
+                    #region ОПРЕДЕЛЕНИЕ ИМЕНИ ПРЕДМЕТА В ИНВЕНТАРЕ
+                        if(string.IsNullOrEmpty(inv.nameObj1));
+                        {
+                            Debug.Log("ъвй0");
+                            inv.nameObj1 = "camera";
+                            return;
+                        }
+
+                        if(inv.nameObj2 == null)
+                        {
+                            inv.nameObj2 = "camera";
+                            return;
+                        }
+
+                        if(inv.nameObj3 == null)
+                        {
+                            inv.nameObj3 = "camera";
+                            return;
+                        }
+
+                        if(inv.nameObj4 == null)
+                        {
+                            inv.nameObj4 = "camera";
+                            return;
+                        }
+
+                        if(inv.nameObj5 == null)
+                        {
+                            inv.nameObj5 = "camera";
+                            return;
+                        }
+
+                        if(inv.nameObj6 == null)
+                        {
+                            inv.nameObj6 = "camera";
+                            return;
+                        }
+
+                        if(inv.nameObj7 == null)
+                        {
+                            inv.nameObj7 = "camera";
+                            return;
+                        }
+
+                        inv.checkNameObj();
+                    #endregion
+                    Destroy(hit.collider.gameObject);
+                }
+            }
+
+            if(hit.collider.tag == "KEY")
+            {
                 if(Input.GetMouseButtonDown(0))
                 {
                     inv.plusObj();

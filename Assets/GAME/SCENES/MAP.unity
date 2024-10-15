@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0072190007, g: 0.015375942, b: 0.015248358, a: 1}
+  m_IndirectSpecularColor: {r: 0.0072189863, g: 0.015375936, b: 0.015248328, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15204,6 +15204,7 @@ MonoBehaviour:
   objIsDown: 0
   isInspection: 0
   isScreamer: 0
+  takePicture: 0
   objTarget:
   - {fileID: 1362109911}
   - {fileID: 1497315209}
@@ -22039,6 +22040,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   light: {fileID: 2047452081}
   enemy: {fileID: 672148621}
+  animationStunEnemy: {fileID: 0}
+  animationWalkEnemy: {fileID: 0}
+  audioTakeFoto: {fileID: 0}
   distanceToEnemy: 0
   goPicture: 0
 --- !u!65 &985147851

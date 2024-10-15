@@ -17,14 +17,8 @@ public class EnemyAIGame : MonoBehaviour
          
         #region FLOAT 
             public float distanceToPlayer; 
- 
-            float aColorImg; 
 
             public float rotationY;
-        #endregion 
- 
-        #region UI 
- 
         #endregion 
  
         #region BOOL 
@@ -169,25 +163,47 @@ public class EnemyAIGame : MonoBehaviour
         {
             Vector3 direction = target.position - transform.position; 
             Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up); 
-            transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0); 
+            transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
+            if(!isScreamer && !takePicture)
+                agent.speed = 1f;
         }
 
         agent.SetDestination(target.position);  
+
         if(!isScreamer && !takePicture)
         {
-            agent.speed = 1f; 
-            takePicture = true;
+            agent.speed = 1f;
         }
     } 
 
     void FixedUpdate()
     {
+        #region ОСМОТР ПРИ ПАТРУЛИРОВАНИИ
         if(isInspection)
         {
-            rotationY += (Time.deltaTime * 50f);
+            if(iSeePlayer)
+            {
+                agent.speed = 1f;
+                isInspection = false;
+            }
+            agent.speed = 0f;
+            rotationY += (Time.deltaTime * 60f);
             transform.rotation = Quaternion.Euler(transform.rotation.x, rotationY,transform.rotation.z);
+            if(!takePicture)
+            {
+                animationWalk.SetActive(false);
+                animationIdle.SetActive(true);
+                animationStun.SetActive(false);
+            }
+            else
+            {
+                animationWalk.SetActive(false);
+                animationIdle.SetActive(false);
+                animationStun.SetActive(true);
+            }
             StartCoroutine(OffIsInspection());
         }
+        #endregion
     }
  
  
@@ -207,8 +223,11 @@ public class EnemyAIGame : MonoBehaviour
 
         IEnumerator OffIsInspection()
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(5);
             isInspection = false;
+            animationWalk.SetActive(true);
+            animationIdle.SetActive(false);
+            rotationY = 0;
         }
 
         private void OnTriggerEnter(Collider a)

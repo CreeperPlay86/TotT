@@ -12,6 +12,8 @@ public class PhotoApparat : MonoBehaviour
 
             public GameObject animationStunEnemy;
             public GameObject animationWalkEnemy;
+
+            public GameObject audioTakeFoto;
         #endregion
 
         #region FLOAT
@@ -40,6 +42,11 @@ public class PhotoApparat : MonoBehaviour
             {
                 StartCoroutine(doPicture());
                 goPicture = false;
+
+                #region СОЗДАНИЕ ЗВУКА
+                    Instantiate(audioTakeFoto);
+                    enemy.GetComponent<EnemyAIGame>().target = enemy.GetComponent<EnemyAIGame>().Player;
+                #endregion      
             }
         }
     }
@@ -51,10 +58,13 @@ public class PhotoApparat : MonoBehaviour
         {
             if(enemy.GetComponent<EnemyAIGame>().isScreamer == false)
             {
-                    light.SetActive(true);
+                #region ENEMY
+                    enemy.GetComponent<EnemyAIGame>().takePicture = true;
                     animationWalkEnemy.SetActive(false);
                     animationStunEnemy.SetActive(true);
                     enemy.GetComponent<EnemyAIGame>().agentSpedZero();
+                #endregion
+                    light.SetActive(true);
                 yield return new WaitForSeconds(0.7f);
                 light.SetActive(false);
                 yield return new WaitForSeconds(1.8f);
@@ -62,7 +72,7 @@ public class PhotoApparat : MonoBehaviour
                     animationWalkEnemy.SetActive(true);
                     animationStunEnemy.SetActive(false);
                     enemy.GetComponent<EnemyAIGame>().takePicture = false;
-                yield return new WaitForSeconds(7f);
+                yield return new WaitForSeconds(7);
                 goPicture = true;
             }
         }

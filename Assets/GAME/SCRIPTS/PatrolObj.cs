@@ -34,6 +34,7 @@ public class PatrolObj : MonoBehaviour
                 enemy.GetComponent<EnemyAIGame>().numberTarget = 0;
             else
                 enemy.GetComponent<EnemyAIGame>().numberTarget++;
+            enemy.GetComponent<EnemyAIGame>().isInspection = true;
         }
         StartCoroutine(myFixedUpdate());
     }
