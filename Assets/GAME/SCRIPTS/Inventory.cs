@@ -15,14 +15,18 @@ public class Inventory : MonoBehaviour // ОТКРЫТИЕ - ИМЕЕТСЯ ЛИ
             public GameObject[] indexInventory2;
             public GameObject[] indexInventory3;
             public GameObject[] indexInventory4;
+            public GameObject[] indexInventory5;
         #endregion  
 
         #region BOOL
             #region имеется ли этот обьект
-                public bool isHaveObj1;
-                public bool isHaveObj2;
-                public bool isHaveObj3;
-                public bool isHaveObj4;
+                public bool isHaveObj1; // ФОТОАППАРАТ
+                public bool isHaveObj2; // СВЕЧКИ
+                public bool isHaveObj3; // ЧАСТИ САТАНИЧЕСКОГО КРУГА
+                public bool isHaveObj4; // ЧЕРЕП ОТЦА ГГ
+                public bool isHaveObj5; // КЛЮЧ
+
+                public bool isOpenInventory;
             #endregion
 
             #region ЗАНЯТ ЛИ ИНДЕКС ИНВЕНТАРЯ
@@ -30,6 +34,7 @@ public class Inventory : MonoBehaviour // ОТКРЫТИЕ - ИМЕЕТСЯ ЛИ
                 public bool isLockIndex2;
                 public bool isLockIndex3;
                 public bool isLockIndex4;
+                public bool isLockIndex5;
             #endregion
         #endregion
 
@@ -38,6 +43,7 @@ public class Inventory : MonoBehaviour // ОТКРЫТИЕ - ИМЕЕТСЯ ЛИ
             public int indexObj2;
             public int indexObj3;
             public int indexObj4;
+            public int indexObj5;
         #endregion
     #endregion
 
@@ -45,9 +51,69 @@ public class Inventory : MonoBehaviour // ОТКРЫТИЕ - ИМЕЕТСЯ ЛИ
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.Tab))
         {
-            plusObj();
+            openOrCloseInventory();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if(isHaveObj1)
+            {
+                objInInventory[0].SetActive(true);
+                objInInventory[1].SetActive(false);
+                objInInventory[2].SetActive(false);
+                objInInventory[3].SetActive(false);
+                objInInventory[4].SetActive(false);
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if(isHaveObj2)
+            {
+                objInInventory[0].SetActive(false);
+                objInInventory[1].SetActive(true);
+                objInInventory[2].SetActive(false);
+                objInInventory[3].SetActive(false);
+                objInInventory[4].SetActive(false);
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if(isHaveObj3)
+            {
+                objInInventory[0].SetActive(false);
+                objInInventory[1].SetActive(false);
+                objInInventory[2].SetActive(true);
+                objInInventory[3].SetActive(false);
+                objInInventory[4].SetActive(false);
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            if(isHaveObj4)
+            {
+                objInInventory[0].SetActive(false);
+                objInInventory[1].SetActive(false);
+                objInInventory[2].SetActive(false);
+                objInInventory[3].SetActive(true);
+                objInInventory[4].SetActive(false);
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            if(isHaveObj5)
+            {
+                objInInventory[0].SetActive(false);
+                objInInventory[1].SetActive(false);
+                objInInventory[2].SetActive(false);
+                objInInventory[3].SetActive(false);
+                objInInventory[4].SetActive(true);
+            }
         }
     }
 
@@ -68,6 +134,7 @@ public class Inventory : MonoBehaviour // ОТКРЫТИЕ - ИМЕЕТСЯ ЛИ
                         indexInventory1[1].SetActive(false);
                         indexInventory1[2].SetActive(false);
                         indexInventory1[3].SetActive(false);
+                        indexInventory1[4].SetActive(false);
                         return;
                     }
                     if(!isLockIndex2)
@@ -79,6 +146,7 @@ public class Inventory : MonoBehaviour // ОТКРЫТИЕ - ИМЕЕТСЯ ЛИ
                         indexInventory1[1].SetActive(true);
                         indexInventory1[2].SetActive(false);
                         indexInventory1[3].SetActive(false);
+                        indexInventory1[4].SetActive(false);
                         return;
                     }
                     if(!isLockIndex3)
@@ -90,6 +158,7 @@ public class Inventory : MonoBehaviour // ОТКРЫТИЕ - ИМЕЕТСЯ ЛИ
                         indexInventory1[1].SetActive(false);
                         indexInventory1[2].SetActive(true);
                         indexInventory1[3].SetActive(false);
+                        indexInventory1[4].SetActive(false);
                         return;
                     }
                     if(!isLockIndex4)
@@ -101,6 +170,19 @@ public class Inventory : MonoBehaviour // ОТКРЫТИЕ - ИМЕЕТСЯ ЛИ
                         indexInventory1[1].SetActive(false);
                         indexInventory1[2].SetActive(false);
                         indexInventory1[3].SetActive(true);
+                        indexInventory1[4].SetActive(false);
+                        return;
+                    }
+                    if(!isLockIndex5)
+                    {
+                        isHaveObj1 = true;
+                        indexObj1 = 5;
+                        isLockIndex5 = true;
+                        indexInventory1[0].SetActive(false);
+                        indexInventory1[1].SetActive(false);
+                        indexInventory1[2].SetActive(false);
+                        indexInventory1[3].SetActive(false);
+                        indexInventory1[4].SetActive(true);
                         return;
                     }
                 }
@@ -118,6 +200,7 @@ public class Inventory : MonoBehaviour // ОТКРЫТИЕ - ИМЕЕТСЯ ЛИ
                         indexInventory2[1].SetActive(false);
                         indexInventory2[2].SetActive(false);
                         indexInventory2[3].SetActive(false);
+                        indexInventory1[4].SetActive(false);
                         return;
                     }
                     if(!isLockIndex2)
@@ -129,6 +212,7 @@ public class Inventory : MonoBehaviour // ОТКРЫТИЕ - ИМЕЕТСЯ ЛИ
                         indexInventory2[1].SetActive(true);
                         indexInventory2[2].SetActive(false);
                         indexInventory2[3].SetActive(false);
+                        indexInventory1[4].SetActive(false);
                         return;
                     }
                     if(!isLockIndex3)
@@ -136,10 +220,11 @@ public class Inventory : MonoBehaviour // ОТКРЫТИЕ - ИМЕЕТСЯ ЛИ
                         isHaveObj2 = true;
                         indexObj2 = 3;
                         isLockIndex3 = true;
-                        indexInventory3[0].SetActive(false);
-                        indexInventory3[1].SetActive(false);
-                        indexInventory3[2].SetActive(true);
-                        indexInventory3[3].SetActive(false);
+                        indexInventory2[0].SetActive(false);
+                        indexInventory2[1].SetActive(false);
+                        indexInventory2[2].SetActive(true);
+                        indexInventory2[3].SetActive(false);
+                        indexInventory2[4].SetActive(false);
                         return;
                     }
                     if(!isLockIndex4)
@@ -147,10 +232,23 @@ public class Inventory : MonoBehaviour // ОТКРЫТИЕ - ИМЕЕТСЯ ЛИ
                         isHaveObj2 = true;
                         indexObj2 = 4;
                         isLockIndex4 = true;
-                        indexInventory4[0].SetActive(false);
-                        indexInventory4[1].SetActive(false);
-                        indexInventory4[2].SetActive(false);
-                        indexInventory4[3].SetActive(true);
+                        indexInventory2[0].SetActive(false);
+                        indexInventory2[1].SetActive(false);
+                        indexInventory2[2].SetActive(false);
+                        indexInventory2[3].SetActive(true);
+                        indexInventory2[4].SetActive(false);
+                        return;
+                    }
+                    if(!isLockIndex5)
+                    {
+                        isHaveObj2 = true;
+                        indexObj2 = 5;
+                        isLockIndex5 = true;
+                        indexInventory2[0].SetActive(false);
+                        indexInventory2[1].SetActive(false);
+                        indexInventory2[2].SetActive(false);
+                        indexInventory2[3].SetActive(false);
+                        indexInventory2[4].SetActive(true);
                         return;
                     }
                 }
@@ -168,6 +266,7 @@ public class Inventory : MonoBehaviour // ОТКРЫТИЕ - ИМЕЕТСЯ ЛИ
                         indexInventory3[1].SetActive(false);
                         indexInventory3[2].SetActive(false);
                         indexInventory3[3].SetActive(false);
+                        indexInventory3[4].SetActive(false);
                         return;
                     }
                     if(!isLockIndex2)
@@ -179,6 +278,7 @@ public class Inventory : MonoBehaviour // ОТКРЫТИЕ - ИМЕЕТСЯ ЛИ
                         indexInventory3[1].SetActive(true);
                         indexInventory3[2].SetActive(false);
                         indexInventory3[3].SetActive(false);
+                        indexInventory3[4].SetActive(false);
                         return;
                     }
                     if(!isLockIndex3)
@@ -190,6 +290,7 @@ public class Inventory : MonoBehaviour // ОТКРЫТИЕ - ИМЕЕТСЯ ЛИ
                         indexInventory3[1].SetActive(false);
                         indexInventory3[2].SetActive(true);
                         indexInventory3[3].SetActive(false);
+                        indexInventory3[4].SetActive(false);
                         return;
                     }
                     if(!isLockIndex4)
@@ -201,6 +302,19 @@ public class Inventory : MonoBehaviour // ОТКРЫТИЕ - ИМЕЕТСЯ ЛИ
                         indexInventory3[1].SetActive(false);
                         indexInventory3[2].SetActive(false);
                         indexInventory3[3].SetActive(true);
+                        indexInventory3[4].SetActive(false);
+                        return;
+                    }
+                    if(!isLockIndex5)
+                    {
+                        isHaveObj3 = true;
+                        indexObj3 = 5;
+                        isLockIndex5 = true;
+                        indexInventory3[0].SetActive(false);
+                        indexInventory3[1].SetActive(false);
+                        indexInventory3[2].SetActive(false);
+                        indexInventory3[3].SetActive(false);
+                        indexInventory3[4].SetActive(true);
                         return;
                     }
                 }
@@ -218,6 +332,7 @@ public class Inventory : MonoBehaviour // ОТКРЫТИЕ - ИМЕЕТСЯ ЛИ
                         indexInventory4[1].SetActive(false);
                         indexInventory4[2].SetActive(false);
                         indexInventory4[3].SetActive(false);
+                        indexInventory4[4].SetActive(false);
                         return;
                     }
                     if(!isLockIndex2)
@@ -229,6 +344,7 @@ public class Inventory : MonoBehaviour // ОТКРЫТИЕ - ИМЕЕТСЯ ЛИ
                         indexInventory4[1].SetActive(true);
                         indexInventory4[2].SetActive(false);
                         indexInventory4[3].SetActive(false);
+                        indexInventory4[4].SetActive(false);
                         return;
                     }
                     if(!isLockIndex3)
@@ -240,6 +356,7 @@ public class Inventory : MonoBehaviour // ОТКРЫТИЕ - ИМЕЕТСЯ ЛИ
                         indexInventory4[1].SetActive(false);
                         indexInventory4[2].SetActive(true);
                         indexInventory4[3].SetActive(false);
+                        indexInventory4[4].SetActive(false);
                         return;
                     }
                     if(!isLockIndex4)
@@ -251,10 +368,102 @@ public class Inventory : MonoBehaviour // ОТКРЫТИЕ - ИМЕЕТСЯ ЛИ
                         indexInventory4[1].SetActive(false);
                         indexInventory4[2].SetActive(false);
                         indexInventory4[3].SetActive(true);
+                        indexInventory4[4].SetActive(false);
+                        return;
+                    }
+                    if(!isLockIndex5)
+                    {
+                        isHaveObj4 = true;
+                        indexObj4 = 5;
+                        isLockIndex5 = true;
+                        indexInventory4[0].SetActive(false);
+                        indexInventory4[1].SetActive(false);
+                        indexInventory4[2].SetActive(false);
+                        indexInventory4[3].SetActive(false);
+                        indexInventory4[4].SetActive(true);
                         return;
                     }
                 }
             #endregion
+
+            #region ПОДБОР 5 ОБЬЕКТА
+                if(!isHaveObj5)
+                {
+                    if(!isLockIndex1)
+                    {
+                        isHaveObj5 = true;
+                        indexObj5 = 1;
+                        isLockIndex1 = true;
+                        indexInventory5[0].SetActive(true);
+                        indexInventory5[1].SetActive(false);
+                        indexInventory5[2].SetActive(false);
+                        indexInventory5[3].SetActive(false);
+                        indexInventory5[4].SetActive(false);
+                        return;
+                    }
+                    if(!isLockIndex2)
+                    {
+                        isHaveObj5 = true;
+                        indexObj5 = 2;
+                        isLockIndex2 = true;
+                        indexInventory5[0].SetActive(false);
+                        indexInventory5[1].SetActive(true);
+                        indexInventory5[2].SetActive(false);
+                        indexInventory5[3].SetActive(false);
+                        indexInventory5[4].SetActive(false);
+                        return;
+                    }
+                    if(!isLockIndex3)
+                    {
+                        isHaveObj5 = true;
+                        indexObj5 = 3;
+                        isLockIndex3 = true;
+                        indexInventory5[0].SetActive(false);
+                        indexInventory5[1].SetActive(false);
+                        indexInventory5[2].SetActive(true);
+                        indexInventory5[3].SetActive(false);
+                        indexInventory5[4].SetActive(false);
+                        return;
+                    }
+                    if(!isLockIndex4)
+                    {
+                        isHaveObj5 = true;
+                        indexObj5 = 4;
+                        isLockIndex4 = true;
+                        indexInventory5[0].SetActive(false);
+                        indexInventory5[1].SetActive(false);
+                        indexInventory5[2].SetActive(false);
+                        indexInventory5[3].SetActive(true);
+                        indexInventory5[4].SetActive(false);
+                        return;
+                    }
+                    if(!isLockIndex5)
+                    {
+                        isHaveObj5 = true;
+                        indexObj5 = 5;
+                        isLockIndex5 = true;
+                        indexInventory5[0].SetActive(false);
+                        indexInventory5[1].SetActive(false);
+                        indexInventory5[2].SetActive(false);
+                        indexInventory5[3].SetActive(false);
+                        indexInventory5[4].SetActive(true);
+                        return;
+                    }
+                }
+            #endregion
+        }
+
+        public void openOrCloseInventory()
+        {
+            if(!isOpenInventory)
+            {
+                inventoryPanel.SetActive(true);
+            }
+            else
+            {
+                inventoryPanel.SetActive(false);
+            }
+            isOpenInventory = !isOpenInventory;
         }
     #endregion
 }

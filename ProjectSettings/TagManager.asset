@@ -11,6 +11,8 @@ TagManager:
   - stena
   - floor
   - stone
+  - fotoapparat
+  - door
   layers:
   - Default
   - TransparentFX

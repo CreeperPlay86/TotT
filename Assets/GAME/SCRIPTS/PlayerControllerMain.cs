@@ -13,17 +13,17 @@ public class PlayerControllerMain : MonoBehaviour
 
             public GameObject enemy;
 
-            #region START
-                public GameObject uiGoToOwner;
+                #region START
+                    public GameObject uiGoToOwner;
 
-                public GameObject metkaDoorOwner;
-            #endregion
+                    public GameObject metkaDoorOwner;
+                #endregion
 
-            #region SOUND
-                public GameObject soundActiveEnemy;
+                #region SOUND
+                    public GameObject soundActiveEnemy;
 
-                public GameObject soundStone;
-            #endregion
+                    public GameObject soundStone;
+                #endregion
         #endregion
 
         #region FLOAT
@@ -42,6 +42,10 @@ public class PlayerControllerMain : MonoBehaviour
             public bool inTheWardrobe;
 
             public bool haveAxe;
+        #endregion
+
+        #region CONNECT
+            public Inventory inv;
         #endregion
     #endregion
     
@@ -87,6 +91,16 @@ public class PlayerControllerMain : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, distance, layer))
         {
+            
+            if(hit.collider.tag == "fotoapparat")
+            {
+                //clickLkmUI.SetActive(true);
+                if(Input.GetMouseButtonDown(0))
+                {
+                    inv.plusObj();
+                    Destroy(hit.collider.gameObject);
+                }
+            }
 
             if(hit.collider.tag == "doorKillOwner")
             {
@@ -101,10 +115,11 @@ public class PlayerControllerMain : MonoBehaviour
 
             if(hit.collider.tag == "door")
             {
-                clickLkmUI.SetActive(true);
+                //clickLkmUI.SetActive(true);
                 if(Input.GetMouseButtonDown(0))
                 {
-                    hit.collider.GetComponent<Door>().openOrCloose();
+                    //hit.collider.GetComponent<Door>().openOrCloose();
+                    hit.collider.GetComponent<Door>().openOrCloseDoor();
                 }
             }
 

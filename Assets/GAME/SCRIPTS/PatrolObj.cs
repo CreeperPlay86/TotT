@@ -30,7 +30,7 @@ public class PatrolObj : MonoBehaviour
         yield return new WaitForSeconds(1f);
         if(distance <= 1.5f)
         {
-            if(enemy.GetComponent<EnemyAIGame>().numberTarget >= 5)
+            if(enemy.GetComponent<EnemyAIGame>().numberTarget >= 6)
                 enemy.GetComponent<EnemyAIGame>().numberTarget = 0;
             else
                 enemy.GetComponent<EnemyAIGame>().numberTarget++;

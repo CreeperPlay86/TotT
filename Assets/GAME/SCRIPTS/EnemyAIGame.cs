@@ -123,7 +123,7 @@ public class EnemyAIGame : MonoBehaviour
                 // ЕСЛИ ПОГОНЯ ПЕРЕСТАЛА ИДТИ - ИИ ИДЕТ СЕКУНДУ ДО ИГРОКА;    
                 // ПОЛУЧЕНИЕ 2 ИНДЕКСА ПОГОНИ - ЕСЛИ ПОГОНЯ 
                 // 
-            if(!(hit.collider.tag == "stena")) // смотрит не в стену
+            if(!(hit.collider.tag == "stena" || hit.collider.tag == "door")) // смотрит не в стену
             {
                 if(hit.collider.tag == "Player") 
                 { 
@@ -182,7 +182,7 @@ public class EnemyAIGame : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up); 
         transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0); 
         agent.SetDestination(target.position);  
-        agent.speed = 2f; 
+        agent.speed = 1f; 
     } 
  
  
