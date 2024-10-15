@@ -9,6 +9,9 @@ public class PhotoApparat : MonoBehaviour
             public GameObject light;
 
             public GameObject enemy;
+
+            public GameObject animationStunEnemy;
+            public GameObject animationWalkEnemy;
         #endregion
 
         #region FLOAT
@@ -46,22 +49,22 @@ public class PhotoApparat : MonoBehaviour
     #region VOID and IEnumerator
         IEnumerator doPicture()
         {
-            light.SetActive(true);
-            yield return new WaitForSeconds(0.7f);
-            light.SetActive(false);
-                #region ОПРЕДЕЛЕНИЕ ДИСТАНЦИИ ДО ENEMY
-                    distanceToEnemy = Vector3.Distance(enemy.transform.position, transform.position);
-
-                    if(distanceToEnemy <= 15f)
-                    {
-                        enemy.GetComponent<MeshRenderer>().enabled = true;
-
-                        yield return new WaitForSeconds(3f);
-                        enemy.GetComponent<MeshRenderer>().enabled = false;
-                    }
-                #endregion
-            yield return new WaitForSeconds(7.3f);
-            goPicture = true;
+            if(enemy.GetComponent<EnemyAIGame>().isScreamer == false)
+            {
+                    light.SetActive(true);
+                    animationWalkEnemy.SetActive(false);
+                    animationStunEnemy.SetActive(true);
+                    enemy.GetComponent<EnemyAIGame>().agentSpedZero();
+                yield return new WaitForSeconds(0.7f);
+                light.SetActive(false);
+                yield return new WaitForSeconds(1.8f);
+                    enemy.GetComponent<EnemyAIGame>().agentSpedDefault();
+                    animationWalkEnemy.SetActive(true);
+                    animationStunEnemy.SetActive(false);
+                    enemy.GetComponent<EnemyAIGame>().takePicture = false;
+                yield return new WaitForSeconds(7f);
+                goPicture = true;
+            }
         }
     #endregion
 }

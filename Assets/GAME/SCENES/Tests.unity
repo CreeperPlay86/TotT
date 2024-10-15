@@ -483,7 +483,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &230434257
 Animator:
   serializedVersion: 3
@@ -1470,7 +1470,7 @@ GameObject:
   - component: {fileID: 775956142}
   - component: {fileID: 775956141}
   m_Layer: 3
-  m_Name: Cube
+  m_Name: fotoapparat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1505,6 +1505,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   light: {fileID: 1750195343}
   enemy: {fileID: 1216858488}
+  animationStunEnemy: {fileID: 1582429305}
+  animationWalkEnemy: {fileID: 2001317374}
   distanceToEnemy: 0
   goPicture: 0
 --- !u!65 &775956142
@@ -1990,11 +1992,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 2134315093}
   distanceToPlayer: 0
+  rotationY: 0
   isGoActiveBtn: 0
   goToPlayer: 0
   iSeePlayer: 0
   iHearPlayer: 0
   objIsDown: 0
+  isInspection: 0
+  isScreamer: 0
   objTarget:
   - {fileID: 1416053386}
   - {fileID: 730541668}
@@ -2002,16 +2007,19 @@ MonoBehaviour:
   - {fileID: 1599877848}
   - {fileID: 1885761267}
   target: {fileID: 0}
-  animationWalk: {fileID: 0}
-  animationStun: {fileID: 0}
-  animationIdle: {fileID: 0}
-  animationScreamer: {fileID: 0}
+  animationWalk: {fileID: 2001317374}
+  animationStun: {fileID: 1582429305}
+  animationIdle: {fileID: 162212166}
+  animationScreamer: {fileID: 1868303364}
+  screamerCamera: {fileID: 0}
+  audioScreamer: {fileID: 0}
   numberTarget: 0
   indexChase: 0
   layer:
     serializedVersion: 2
     m_Bits: 8
   distance: 146.3
+  graphics: {fileID: 0}
 --- !u!195 &1216858490
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2055,7 +2063,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1216858488}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2135,7 +2143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1225492828
 Animator:
   serializedVersion: 3
@@ -2342,7 +2350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6a011eb019b4b184ead417e7e2d95019, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.16
+      value: -0.093
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6a011eb019b4b184ead417e7e2d95019, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2350,7 +2358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6a011eb019b4b184ead417e7e2d95019, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.00999999
+      value: -0.115
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6a011eb019b4b184ead417e7e2d95019, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2682,7 +2690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2d5466e33683ec543b8222d594df591d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.7619991
+      value: -0.006
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2d5466e33683ec543b8222d594df591d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2690,7 +2698,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2d5466e33683ec543b8222d594df591d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.66400003
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2d5466e33683ec543b8222d594df591d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3643,7 +3651,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 40
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1889382996
 Animator:
   serializedVersion: 3
@@ -4124,7 +4132,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &2121246203
 Animator:
   serializedVersion: 3
@@ -4427,6 +4435,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   level: 0
+  health: 0
   inTheWardrobe: 0
   haveAxe: 0
   inv: {fileID: 0}

@@ -19,6 +19,8 @@ public class EnemyAIGame : MonoBehaviour
             public float distanceToPlayer; 
  
             float aColorImg; 
+
+            public float rotationY;
         #endregion 
  
         #region UI 
@@ -36,6 +38,10 @@ public class EnemyAIGame : MonoBehaviour
             public bool objIsDown;
 
             public bool isInspection;
+
+            public bool isScreamer;
+
+            public bool takePicture;
         #endregion 
  
         #region GAME OBJECTS 
@@ -47,6 +53,12 @@ public class EnemyAIGame : MonoBehaviour
             public GameObject animationStun;
             public GameObject animationIdle;
             public GameObject animationScreamer;
+
+            public GameObject screamerCamera;
+
+            #region AUDIO
+                public GameObject audioScreamer;
+            #endregion
         #endregion 
          
         #region INT 
@@ -64,6 +76,10 @@ public class EnemyAIGame : MonoBehaviour
 
             // включается вспышка - появляется скин стана после чего на пару секунд появляется скин ходьбы и енеми ускоряется в 2 раза на 10 секунд
         #endregion 
+
+        #region CONNECT
+            public GameObject graphics;
+        #endregion
     #endregion 
  
     void Start() 
@@ -157,15 +173,19 @@ public class EnemyAIGame : MonoBehaviour
         }
 
         agent.SetDestination(target.position);  
-        agent.speed = 1f; 
+        if(!isScreamer && !takePicture)
+        {
+            agent.speed = 1f; 
+            takePicture = true;
+        }
     } 
 
     void FixedUpdate()
     {
         if(isInspection)
         {
-            rotationY += Time.deltaTime * 50f;
-            transform.rotation = Quaternion.Euler(transform.rotation.x, ,transform.rotation.z)
+            rotationY += (Time.deltaTime * 50f);
+            transform.rotation = Quaternion.Euler(transform.rotation.x, rotationY,transform.rotation.z);
             StartCoroutine(OffIsInspection());
         }
     }
@@ -176,6 +196,44 @@ public class EnemyAIGame : MonoBehaviour
         IEnumerator KDChase()
         {
             yield return new WaitForSeconds(1f);
+        }
+
+        IEnumerator spawnEnemy()
+        {
+            yield return new WaitForSeconds(3);
+            agent.speed = 1f;
+            isScreamer = false;
+        }
+
+        IEnumerator OffIsInspection()
+        {
+            yield return new WaitForSeconds(1);
+            isInspection = false;
+        }
+
+        private void OnTriggerEnter(Collider a)
+        {
+            if(a.gameObject.tag == "playerTrigger")
+            {
+                #region SCREAMER
+                    Instantiate(audioScreamer);
+                    Player.GetComponent<PlayerControllerMain>().health--;
+                        StartCoroutine(spawnEnemy());
+                        transform.position = new Vector3(-0.24f, 1.042f, -0.157f);
+                        agent.speed = 0f; 
+                        screamerCamera.SetActive(true);
+                #endregion
+            }
+        }
+
+        public void agentSpedZero()
+        {
+            agent.speed = 0f; 
+        }
+
+        public void agentSpedDefault()
+        {
+            agent.speed = 1f; 
         }
     #endregion 
 }

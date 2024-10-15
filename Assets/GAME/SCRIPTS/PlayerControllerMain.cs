@@ -36,6 +36,8 @@ public class PlayerControllerMain : MonoBehaviour
 
         #region INT
             public int level;
+
+            public int health;
         #endregion
 
         #region BOOL
@@ -53,34 +55,35 @@ public class PlayerControllerMain : MonoBehaviour
 
     void Start()
     {
-        level = PlayerPrefs.GetInt("level");
+        health = 3;
+        //level = PlayerPrefs.GetInt("level");
         #region растановка игрока и обьеков по уровню
-            if(level == 0)
-            {
-                uiGoToOwner.SetActive(true);
-                metkaDoorOwner.SetActive(true);
-            }
-            if(level == 1)
-            {
-                //transform.position = new Vctor3(); // игрок выходит из той комнаты  
-            }
-            if(level == 2)
-            {
-                //тоже самое что и level == 1                       // и видит как появляется дух и игрок бежит в любую комнату со шкафом
-            }
-            if(level == 3)
-            {
-                //transform.position = new Vector3();
-                //игрок спрятался в шкафу И СЕЙЧАС ПОЙДЕТ НА ПОИСК КАРТИНЫ;
-            }
-            if(level == 4)
-            {
-                // transform.position = new Vector3(); // игрок уже нашел место с картиной и сейчас отправится на поиск подходящей комнаты для ритуала
-            }
-            if(level == 5)
-            {
-                // transform.position = new Vector3(); // игрок нашел комнату для ритуала и сейчас пойдет на поиски всех предметов и потом завершает игру.
-            }
+        //    if(level == 0)
+        //    {
+        //        uiGoToOwner.SetActive(true);
+        //        metkaDoorOwner.SetActive(true);
+        //    }
+        //    if(level == 1)
+        //    {
+        //        //transform.position = new Vctor3(); // игрок выходит из той комнаты  
+        //    }
+        //    if(level == 2)
+        //    {
+        //        //тоже самое что и level == 1                       // и видит как появляется дух и игрок бежит в любую комнату со шкафом
+        //    }
+        //    if(level == 3)
+        //    {
+        //        //transform.position = new Vector3();
+        //        //игрок спрятался в шкафу И СЕЙЧАС ПОЙДЕТ НА ПОИСК КАРТИНЫ;
+        //    }
+        //    if(level == 4)
+        //    {
+        //        // transform.position = new Vector3(); // игрок уже нашел место с картиной и сейчас отправится на поиск подходящей комнаты для ритуала
+        //    }
+        //    if(level == 5)
+        //    {
+        //        // transform.position = new Vector3(); // игрок нашел комнату для ритуала и сейчас пойдет на поиски всех предметов и потом завершает игру.
+        //    }
         #endregion
     }
 
