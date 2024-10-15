@@ -34,12 +34,19 @@ public class EnemyAIGame : MonoBehaviour
             public bool iHearPlayer;
 
             public bool objIsDown;
+
+            public bool isInspection;
         #endregion 
  
         #region GAME OBJECTS 
             public GameObject[] objTarget; 
  
             public Transform target; 
+
+            public GameObject animationWalk;
+            public GameObject animationStun;
+            public GameObject animationIdle;
+            public GameObject animationScreamer;
         #endregion 
          
         #region INT 
@@ -54,6 +61,8 @@ public class EnemyAIGame : MonoBehaviour
             private Camera _camera; 
  
             public float distance; 
+
+            // включается вспышка - появляется скин стана после чего на пару секунд появляется скин ходьбы и енеми ускоряется в 2 раза на 10 секунд
         #endregion 
     #endregion 
  
@@ -68,20 +77,6 @@ public class EnemyAIGame : MonoBehaviour
     { 
         distanceToPlayer = Vector3.Distance(transform.position, Player.position); 
 
-        //if(distanceToPlayer <= 15f && Player.GetComponent<PlayerMovementGAME>().onTheCarpet == false && Player.GetComponent<PlayerControllerMain>().inTheWardrobe == false && Player.GetComponent<PlayerMovementGAME>().isActiveAudio == false)
-        //{
-        //    target = Player; 
-        //    goToPlayer = true;  
-        //}
-        //else
-        //{
-        //    if(!goToPlayer)
-        //    {
-        //        target = objTarget[numberTarget].transform; 
-        //        goToPlayer = false; 
-        //    }
-        //}
-
         // если он видит игрока - идет за ним, если не видит его но слышит - идет за ним
 
         RaycastHit hit; 
@@ -94,31 +89,7 @@ public class EnemyAIGame : MonoBehaviour
             
             #region ПРИСЛЕДОВАНИЕ И ОТСЛЕДОВАНИЕ С ИГРОКОМ 
  
-            //if(!(hit.collider.tag == "stena"))
-            //{
-            //    if(hit.collider.tag == "Player") 
-            //    { 
-            //        iSeePlayer = true;
-            //        target = Player; 
-            //        goToPlayer = true; 
-            //    } 
-            //    else
-            //    {
-            //        iSeePlayer = false;
-            //    }
-            //}
-            //else
-            //{
-            //    iSeePlayer = false;
-            //}
-            //if(!(hit.collider.tag == "Player"))
-            //{ 
-            //    if(distanceToPlayer > 15f)
-            //    {
-            //        target = objTarget[numberTarget].transform; 
-            //        goToPlayer = false; 
-            //    }
-            //} // ЕСЛИ ПРОТИВНИК ВИДИТ ИГРОКА - ИДЕТ ЗА НИМ; ЕСЛИ ПРОТИВНИК НЕ ВИДИТ ИГРОКА НО СЛЫШИТ ЕГО - ИДЕТ ЗА НИМ; ЕСЛИ ПРОТИВНИК НЕ СЛЫШИТ И НЕ ВИДИТ ИГРОКА - ИДЕТ ПО СТОПАМ
+                // ЕСЛИ ПРОТИВНИК ВИДИТ ИГРОКА - ИДЕТ ЗА НИМ; ЕСЛИ ПРОТИВНИК НЕ ВИДИТ ИГРОКА НО СЛЫШИТ ЕГО - ИДЕТ ЗА НИМ; ЕСЛИ ПРОТИВНИК НЕ СЛЫШИТ И НЕ ВИДИТ ИГРОКА - ИДЕТ ПО СТОПАМ
                 // ЕСЛИ ПРОТИВНИК СЛЫШИТ ИГРОКА - ИДЕТ ЗА НИМ; ЕСЛИ ПРОТИВНИК НЕ СЛЫШИТ ИГРОКА НО ВИДИТ ЕГО - ИДЕТ ЗА НИМ; ЕСЛИ ПРОТИВНИК НЕ СЛЫШИТ И НЕ ВИДИТ ИГРОКА - ИДЕТ ПО СТОПАМ
                 // ЕСЛИ ПОГОНЯ ПЕРЕСТАЛА ИДТИ - ИИ ИДЕТ СЕКУНДУ ДО ИГРОКА;    
                 // ПОЛУЧЕНИЕ 2 ИНДЕКСА ПОГОНИ - ЕСЛИ ПОГОНЯ 
@@ -167,7 +138,6 @@ public class EnemyAIGame : MonoBehaviour
                 }
             }            
             #endregion 
-
         } 
 
         if(indexChase == 0)
@@ -178,12 +148,27 @@ public class EnemyAIGame : MonoBehaviour
                 indexChase = 0;
             }
         }
-        Vector3 direction = target.position - transform.position; 
-        Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up); 
-        transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0); 
+
+        if(!isInspection)
+        {
+            Vector3 direction = target.position - transform.position; 
+            Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up); 
+            transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0); 
+        }
+
         agent.SetDestination(target.position);  
         agent.speed = 1f; 
     } 
+
+    void FixedUpdate()
+    {
+        if(isInspection)
+        {
+            rotationY += Time.deltaTime * 50f;
+            transform.rotation = Quaternion.Euler(transform.rotation.x, ,transform.rotation.z)
+            StartCoroutine(OffIsInspection());
+        }
+    }
  
  
  
