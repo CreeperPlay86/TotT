@@ -24,6 +24,8 @@ public class PlayerControllerMain : MonoBehaviour
                     public GameObject soundActiveEnemy;
 
                     public GameObject soundStone;
+
+                    public GameObject soundOpenDoorShelf;
                 #endregion
         #endregion
 
@@ -156,6 +158,17 @@ public class PlayerControllerMain : MonoBehaviour
                         Instantiate(soundStone);
                         gameObject.GetComponent<PlayerMovementGAME>().isActiveAudio = true;
                     }
+                }
+            }
+
+            if(hit.collider.tag == "shelf")
+            {
+                clickLkmUI.SetActive(true);
+                if(Input.GetMouseButtonDown(0))
+                {
+                    hit.collider.GetComponent<ShelfZam>().do();
+                    Instantiate(soundOpenDoorShelf);
+                    gameObject.GetComponent<PlayerMovementGAME>().isActiveAudio = true;
                 }
             }
         }

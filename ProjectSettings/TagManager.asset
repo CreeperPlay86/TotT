@@ -15,6 +15,7 @@ TagManager:
   - door
   - KEY
   - Enemy
+  - shelf
   layers:
   - Default
   - TransparentFX
