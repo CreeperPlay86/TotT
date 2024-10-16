@@ -17,12 +17,8 @@ public class EnemyAIGame : MonoBehaviour
          
         #region FLOAT 
             public float distanceToPlayer; 
- 
-            float aColorImg; 
-        #endregion 
- 
-        #region UI 
- 
+
+            public float rotationY;
         #endregion 
  
         #region BOOL 
@@ -34,12 +30,29 @@ public class EnemyAIGame : MonoBehaviour
             public bool iHearPlayer;
 
             public bool objIsDown;
+
+            public bool isInspection;
+
+            public bool isScreamer;
+
+            public bool takePicture;
         #endregion 
  
         #region GAME OBJECTS 
             public GameObject[] objTarget; 
  
             public Transform target; 
+
+            public GameObject animationWalk;
+            public GameObject animationStun;
+            public GameObject animationIdle;
+            public GameObject animationScreamer;
+
+            public GameObject screamerCamera;
+
+            #region AUDIO
+                public GameObject audioScreamer;
+            #endregion
         #endregion 
          
         #region INT 
@@ -54,7 +67,13 @@ public class EnemyAIGame : MonoBehaviour
             private Camera _camera; 
  
             public float distance; 
+
+            // включается вспышка - появляется скин стана после чего на пару секунд появляется скин ходьбы и енеми ускоряется в 2 раза на 10 секунд
         #endregion 
+
+        #region CONNECT
+            public GameObject graphics;
+        #endregion
     #endregion 
  
     void Start() 
@@ -68,20 +87,6 @@ public class EnemyAIGame : MonoBehaviour
     { 
         distanceToPlayer = Vector3.Distance(transform.position, Player.position); 
 
-        //if(distanceToPlayer <= 15f && Player.GetComponent<PlayerMovementGAME>().onTheCarpet == false && Player.GetComponent<PlayerControllerMain>().inTheWardrobe == false && Player.GetComponent<PlayerMovementGAME>().isActiveAudio == false)
-        //{
-        //    target = Player; 
-        //    goToPlayer = true;  
-        //}
-        //else
-        //{
-        //    if(!goToPlayer)
-        //    {
-        //        target = objTarget[numberTarget].transform; 
-        //        goToPlayer = false; 
-        //    }
-        //}
-
         // если он видит игрока - идет за ним, если не видит его но слышит - идет за ним
 
         RaycastHit hit; 
@@ -94,31 +99,7 @@ public class EnemyAIGame : MonoBehaviour
             
             #region ПРИСЛЕДОВАНИЕ И ОТСЛЕДОВАНИЕ С ИГРОКОМ 
  
-            //if(!(hit.collider.tag == "stena"))
-            //{
-            //    if(hit.collider.tag == "Player") 
-            //    { 
-            //        iSeePlayer = true;
-            //        target = Player; 
-            //        goToPlayer = true; 
-            //    } 
-            //    else
-            //    {
-            //        iSeePlayer = false;
-            //    }
-            //}
-            //else
-            //{
-            //    iSeePlayer = false;
-            //}
-            //if(!(hit.collider.tag == "Player"))
-            //{ 
-            //    if(distanceToPlayer > 15f)
-            //    {
-            //        target = objTarget[numberTarget].transform; 
-            //        goToPlayer = false; 
-            //    }
-            //} // ЕСЛИ ПРОТИВНИК ВИДИТ ИГРОКА - ИДЕТ ЗА НИМ; ЕСЛИ ПРОТИВНИК НЕ ВИДИТ ИГРОКА НО СЛЫШИТ ЕГО - ИДЕТ ЗА НИМ; ЕСЛИ ПРОТИВНИК НЕ СЛЫШИТ И НЕ ВИДИТ ИГРОКА - ИДЕТ ПО СТОПАМ
+                // ЕСЛИ ПРОТИВНИК ВИДИТ ИГРОКА - ИДЕТ ЗА НИМ; ЕСЛИ ПРОТИВНИК НЕ ВИДИТ ИГРОКА НО СЛЫШИТ ЕГО - ИДЕТ ЗА НИМ; ЕСЛИ ПРОТИВНИК НЕ СЛЫШИТ И НЕ ВИДИТ ИГРОКА - ИДЕТ ПО СТОПАМ
                 // ЕСЛИ ПРОТИВНИК СЛЫШИТ ИГРОКА - ИДЕТ ЗА НИМ; ЕСЛИ ПРОТИВНИК НЕ СЛЫШИТ ИГРОКА НО ВИДИТ ЕГО - ИДЕТ ЗА НИМ; ЕСЛИ ПРОТИВНИК НЕ СЛЫШИТ И НЕ ВИДИТ ИГРОКА - ИДЕТ ПО СТОПАМ
                 // ЕСЛИ ПОГОНЯ ПЕРЕСТАЛА ИДТИ - ИИ ИДЕТ СЕКУНДУ ДО ИГРОКА;    
                 // ПОЛУЧЕНИЕ 2 ИНДЕКСА ПОГОНИ - ЕСЛИ ПОГОНЯ 
@@ -167,7 +148,6 @@ public class EnemyAIGame : MonoBehaviour
                 }
             }            
             #endregion 
-
         } 
 
         if(indexChase == 0)
@@ -178,12 +158,53 @@ public class EnemyAIGame : MonoBehaviour
                 indexChase = 0;
             }
         }
-        Vector3 direction = target.position - transform.position; 
-        Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up); 
-        transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0); 
+
+        if(!isInspection)
+        {
+            Vector3 direction = target.position - transform.position; 
+            Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up); 
+            transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
+            if(!isScreamer && !takePicture)
+                agent.speed = 1f;
+        }
+
         agent.SetDestination(target.position);  
-        agent.speed = 1f; 
+
+        if(!isScreamer && !takePicture)
+        {
+            agent.speed = 1f;
+        }
     } 
+
+    void FixedUpdate()
+    {
+        #region ОСМОТР ПРИ ПАТРУЛИРОВАНИИ
+        if(isInspection)
+        {
+            if(iSeePlayer)
+            {
+                agent.speed = 1f;
+                isInspection = false;
+            }
+            agent.speed = 0f;
+            rotationY += (Time.deltaTime * 60f);
+            transform.rotation = Quaternion.Euler(transform.rotation.x, rotationY,transform.rotation.z);
+            if(!takePicture)
+            {
+                animationWalk.SetActive(false);
+                animationIdle.SetActive(true);
+                animationStun.SetActive(false);
+            }
+            else
+            {
+                animationWalk.SetActive(false);
+                animationIdle.SetActive(false);
+                animationStun.SetActive(true);
+            }
+            StartCoroutine(OffIsInspection());
+        }
+        #endregion
+    }
  
  
  
@@ -191,6 +212,47 @@ public class EnemyAIGame : MonoBehaviour
         IEnumerator KDChase()
         {
             yield return new WaitForSeconds(1f);
+        }
+
+        IEnumerator spawnEnemy()
+        {
+            yield return new WaitForSeconds(3);
+            agent.speed = 1f;
+            isScreamer = false;
+        }
+
+        IEnumerator OffIsInspection()
+        {
+            yield return new WaitForSeconds(5);
+            isInspection = false;
+            animationWalk.SetActive(true);
+            animationIdle.SetActive(false);
+            rotationY = 0;
+        }
+
+        private void OnTriggerEnter(Collider a)
+        {
+            if(a.gameObject.tag == "playerTrigger")
+            {
+                #region SCREAMER
+                    Instantiate(audioScreamer);
+                    Player.GetComponent<PlayerControllerMain>().health--;
+                        StartCoroutine(spawnEnemy());
+                        transform.position = new Vector3(-0.24f, 1.042f, -0.157f);
+                        agent.speed = 0f; 
+                        screamerCamera.SetActive(true);
+                #endregion
+            }
+        }
+
+        public void agentSpedZero()
+        {
+            agent.speed = 0f; 
+        }
+
+        public void agentSpedDefault()
+        {
+            agent.speed = 1f; 
         }
     #endregion 
 }

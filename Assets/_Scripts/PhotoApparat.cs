@@ -9,6 +9,11 @@ public class PhotoApparat : MonoBehaviour
             public GameObject light;
 
             public GameObject enemy;
+
+            public GameObject animationStunEnemy;
+            public GameObject animationWalkEnemy;
+
+            public GameObject audioTakeFoto;
         #endregion
 
         #region FLOAT
@@ -37,6 +42,11 @@ public class PhotoApparat : MonoBehaviour
             {
                 StartCoroutine(doPicture());
                 goPicture = false;
+
+                #region СОЗДАНИЕ ЗВУКА
+                    Instantiate(audioTakeFoto);
+                    enemy.GetComponent<EnemyAIGame>().target = enemy.GetComponent<EnemyAIGame>().Player;
+                #endregion      
             }
         }
     }
@@ -46,22 +56,25 @@ public class PhotoApparat : MonoBehaviour
     #region VOID and IEnumerator
         IEnumerator doPicture()
         {
-            light.SetActive(true);
-            yield return new WaitForSeconds(0.7f);
-            light.SetActive(false);
-                #region ОПРЕДЕЛЕНИЕ ДИСТАНЦИИ ДО ENEMY
-                    distanceToEnemy = Vector3.Distance(enemy.transform.position, transform.position);
-
-                    if(distanceToEnemy <= 15f)
-                    {
-                        enemy.GetComponent<MeshRenderer>().enabled = true;
-
-                        yield return new WaitForSeconds(3f);
-                        enemy.GetComponent<MeshRenderer>().enabled = false;
-                    }
+            if(enemy.GetComponent<EnemyAIGame>().isScreamer == false)
+            {
+                #region ENEMY
+                    enemy.GetComponent<EnemyAIGame>().takePicture = true;
+                    animationWalkEnemy.SetActive(false);
+                    animationStunEnemy.SetActive(true);
+                    enemy.GetComponent<EnemyAIGame>().agentSpedZero();
                 #endregion
-            yield return new WaitForSeconds(7.3f);
-            goPicture = true;
+                    light.SetActive(true);
+                yield return new WaitForSeconds(0.7f);
+                light.SetActive(false);
+                yield return new WaitForSeconds(1.8f);
+                    enemy.GetComponent<EnemyAIGame>().agentSpedDefault();
+                    animationWalkEnemy.SetActive(true);
+                    animationStunEnemy.SetActive(false);
+                    enemy.GetComponent<EnemyAIGame>().takePicture = false;
+                yield return new WaitForSeconds(7);
+                goPicture = true;
+            }
         }
     #endregion
 }
