@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8235644206508002404}
   - component: {fileID: 1695688589224322500}
-  - component: {fileID: 4512063927370887138}
   m_Layer: 3
   m_Name: Door_CL
   m_TagString: door
@@ -42,29 +41,10 @@ BoxCollider:
   m_GameObject: {fileID: 164117133387836571}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.11856872, y: 2.0043962, z: 0.8018184}
   m_Center: {x: -0.0037757456, y: 1.0014247, z: -0.39999998}
---- !u!114 &4512063927370887138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 164117133387836571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 499f9982dcafbab44a14d4d7315856cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Anim: {fileID: 3178382440179365307}
-  DoorClosed: 0
-  goAnimation: 0
-  KDanim: 0
-  soundOpenDoor: {fileID: 2965833643544726045, guid: 6a00af026693b2d4a8d1b953dc3baa78, type: 3}
-  enemy: {fileID: 0}
-  distance: 0
 --- !u!1 &4281130661302633893
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,6 +150,8 @@ GameObject:
   m_Component:
   - component: {fileID: 899460558154474415}
   - component: {fileID: 3178382440179365307}
+  - component: {fileID: 1081131737492734841}
+  - component: {fileID: 4131174879510313783}
   m_Layer: 3
   m_Name: Door_Pivot
   m_TagString: door
@@ -211,3 +193,36 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &1081131737492734841
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4781307310871242076}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.08432007, y: 2.033229, z: 0.82371557}
+  m_Center: {x: 0.01682663, y: 1.0067273, z: 0.38729644}
+--- !u!114 &4131174879510313783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4781307310871242076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 499f9982dcafbab44a14d4d7315856cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Anim: {fileID: 3178382440179365307}
+  DoorClosed: 1
+  goAnimation: 0
+  KDanim: 0
+  KDpatrol: 0
+  soundOpenDoor: {fileID: 2965833643544726045, guid: 6a00af026693b2d4a8d1b953dc3baa78, type: 3}
+  enemy: {fileID: 0}
+  distance: 0

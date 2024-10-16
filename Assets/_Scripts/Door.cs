@@ -13,6 +13,8 @@ public class Door : MonoBehaviour
 
     public bool KDpatrol;
 
+    public bool activeAudioDoor;
+
     public GameObject soundOpenDoor;
 
     public GameObject enemy;
@@ -22,7 +24,7 @@ public class Door : MonoBehaviour
     void Start(){
 
         Anim.Play("CloseDoor");
-
+        enemy = GameObject.FindGameObjectWithTag("Enemy");
     }
 
     void Update(){
@@ -35,13 +37,13 @@ public class Door : MonoBehaviour
             goAnimation = false;
             StartCoroutine(KdAnimation());
             if(DoorClosed){
-
+                activeAudioDoor = true;
                 DoorClosed = false;
                 Anim.Play("OpenDoor");
 
             }
             if(!DoorClosed){
-
+                activeAudioDoor = false;
                 DoorClosed = true;
                 Anim.Play("CloseDoor");
 
@@ -54,8 +56,9 @@ public class Door : MonoBehaviour
         {
             enemy.GetComponent<EnemyAIGame>().objIsDown = false;
         }
-        if(distance <= 2f)
+        if(distance <= 2f && activeAudioDoor)
         {
+            activeAudioDoor = false;
             if(KDpatrol)
                 return;
             if(enemy.GetComponent<EnemyAIGame>().numberTarget >= 5)

@@ -172,7 +172,10 @@ public class EnemyAIGame : MonoBehaviour
 
         if(!isScreamer && !takePicture)
         {
-            agent.speed = 1f;
+            if(!isInspection)
+                agent.speed = 1f;
+            else
+                agent.speed = 0f;
         }
     } 
 

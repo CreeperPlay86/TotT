@@ -27,9 +27,10 @@ public class PatrolObj : MonoBehaviour
 
     IEnumerator myFixedUpdate()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
         if(distance <= 1.5f)
         {
+            Debug.Log("тест");
             if(enemy.GetComponent<EnemyAIGame>().numberTarget >= 5)
                 enemy.GetComponent<EnemyAIGame>().numberTarget = 0;
             else
