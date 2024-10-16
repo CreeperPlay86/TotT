@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class EnemyAIGame : MonoBehaviour 
 { 
@@ -86,6 +87,11 @@ public class EnemyAIGame : MonoBehaviour
     void Update() 
     { 
         distanceToPlayer = Vector3.Distance(transform.position, Player.position); 
+
+        //if(distanceToPlayer <= 1.5)
+        //{
+        //    SceneManager.LoadScene("Screamer");
+        //}
 
         // если он видит игрока - идет за ним, если не видит его но слышит - идет за ним
 
@@ -251,11 +257,23 @@ public class EnemyAIGame : MonoBehaviour
         public void agentSpedZero()
         {
             agent.speed = 0f; 
+            Debug.Log("а");
         }
 
         public void agentSpedDefault()
         {
             agent.speed = 1f; 
+            indexChase = 3;
+            StartCoroutine(KDindex3());
+        }
+
+        IEnumerator KDindex3()
+        {
+            yield return new WaitForSeconds(2f);
+            if(agent.speed != 0f)
+            {
+                agent.speed = 2f;
+            }
         }
     #endregion 
 }

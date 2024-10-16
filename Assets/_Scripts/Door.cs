@@ -33,17 +33,18 @@ public class Door : MonoBehaviour
         {
             if(KDanim)
                 return;
+            activeAudioDoor = true;
             KDanim = true;
             goAnimation = false;
             StartCoroutine(KdAnimation());
-            if(DoorClosed){
-                activeAudioDoor = true;
+            if(DoorClosed)
+            {
                 DoorClosed = false;
                 Anim.Play("OpenDoor");
 
             }
-            if(!DoorClosed){
-                activeAudioDoor = false;
+            if(!DoorClosed)
+            {
                 DoorClosed = true;
                 Anim.Play("CloseDoor");
 
