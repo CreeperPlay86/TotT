@@ -13,6 +13,7 @@ TagManager:
   - stone
   - fotoapparat
   - door
+  - KEY
   layers:
   - Default
   - TransparentFX
