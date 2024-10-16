@@ -29,6 +29,15 @@ public class PlayerControllerMain : MonoBehaviour
                 #endregion
 
             public GameObject animationHands;
+<<<<<<< Updated upstream
+=======
+
+            public Transform locationCircle;
+
+            public GameObject circleFull;
+            
+            public GameObject[] delatsCircle;
+>>>>>>> Stashed changes
         #endregion
 
         #region FLOAT
@@ -49,6 +58,13 @@ public class PlayerControllerMain : MonoBehaviour
             public bool inTheWardrobe;
 
             public bool haveAxe;
+<<<<<<< Updated upstream
+=======
+
+            public bool iHave3lvl;
+
+            public bool goBuildCircle;
+>>>>>>> Stashed changes
         #endregion
 
         #region CONNECT
@@ -231,41 +247,86 @@ public class PlayerControllerMain : MonoBehaviour
                 }
             }
 
+            if(hit.collider.tag == "fullCircle")
+            {
+                if(goBuildCircle)
+                {
+                    if(Input.GetMouseButtonDown(0))
+                    {
+                        if(fragments != 0)
+                        {
+                            if(fragments == 6)
+                                delatsCircle[0].SetActive(true);
+                            if(fragments == 5)
+                                delatsCircle[1].SetActive(true);
+                            if(fragments == 4)
+                                delatsCircle[2].SetActive(true);
+                            if(fragments == 3)
+                                delatsCircle[3].SetActive(true);
+                            if(fragments == 2)
+                                delatsCircle[4].SetActive(true);
+                            if(fragments == 1)
+                                delatsCircle[5].SetActive(true);
+                            fragments--;
+                            return;
+                        }
+                        if(candles != 0)
+                        {
+                            if(candles == 5)
+                            
+                            candles--;
+                            return;
+                        }
+                        if(scull != 0)
+                        {
+                            scull--;
+                            return;
+                        }
+                        if(scull == 0 && candles == 0 && fragments == 0)
+                        {
+                            SceneManager.LoadScene("Win");
+                        }
+                    }
+                }
+            }
+
             if(fragments >= 6 && candles >= 5 && scull >= 1)
             {
                 level = 3;
             }
 
-            if(hit.collider.tag == "circle" && distanceToCircle <= 1.5f)
-            {
-               //clickLkmUI.SetActive(true); 
-               if(Input.GetMouseButtonDown(0))
-                {
-                    if(fragments != 0)
-                    {
-                        fragments--;
-                        return;
-                    }
-                    if(candles != 0)
-                    {
-                        candles--;
-                        return;
-                    }
-                    if(scull != 0)
-                    {
-                        scull--;
-                        return;
-                    }
-                    if(scull == 0 && candles == 0 && fragments == 0)
-                    {
-                        SceneManager.LoadScene("Win");
-                    }
-                }
-            }
+           // if(hit.collider.tag == "circle" && distanceToCircle <= 1.5f)
+           // {
+           //    //clickLkmUI.SetActive(true); 
+           //    if(Input.GetMouseButtonDown(0))
+           //     {
+           //         if(fragments != 0)
+           //         {
+           //             
+           //             fragments--;
+           //             return;
+           //         }
+           //         if(candles != 0)
+           //         {
+           //             candles--;
+           //             return;
+           //         }
+           //         if(scull != 0)
+           //         {
+           //             scull--;
+           //             return;
+           //         }
+           //         if(scull == 0 && candles == 0 && fragments == 0)
+           //         {
+           //             SceneManager.LoadScene("Win");
+           //         }
+           //     }
+           // }
         }
 
         if(_progress.progress >= 3)
         {
+<<<<<<< Updated upstream
             distanceToCircle = Vector3.Distance(transform.position, locationCircle.position);
         }
         else
@@ -273,6 +334,9 @@ public class PlayerControllerMain : MonoBehaviour
             distanceToCircle = 1500f;
 =======
 >>>>>>> parent of ca99ca5 (адекватное название комита 2)
+=======
+            goBuildCircle = true;
+>>>>>>> Stashed changes
         }
     }
 
