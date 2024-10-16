@@ -27,6 +27,8 @@ public class PlayerControllerMain : MonoBehaviour
 
                     public GameObject soundOpenDoorShelf;
                 #endregion
+
+            public GameObject animationHands;
         #endregion
 
         #region FLOAT
@@ -92,6 +94,10 @@ public class PlayerControllerMain : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            transform.position = new Vector3(0, 0, 0);
+        }
         RaycastHit hit;
         Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0 ));
 
@@ -163,11 +169,14 @@ public class PlayerControllerMain : MonoBehaviour
 
             if(hit.collider.tag == "shelf")
             {
-                clickLkmUI.SetActive(true);
+                Debug.Log("есть че то");
+                //clickLkmUI.SetActive(true);
                 if(Input.GetMouseButtonDown(0))
                 {
-                    hit.collider.GetComponent<ShelfZam>().do();
-                    Instantiate(soundOpenDoorShelf);
+                    animationHands.SetActive(true);
+                    animationHands.GetComponent<Animator>().Play("animationHand");
+                    hit.collider.GetComponent<ShelfZam>().doing();
+                    //Instantiate(soundOpenDoorShelf);
                     gameObject.GetComponent<PlayerMovementGAME>().isActiveAudio = true;
                 }
             }

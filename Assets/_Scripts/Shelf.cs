@@ -10,6 +10,8 @@ public class Shelf : MonoBehaviour
             public GameObject meOpenned;
             public GameObject meClosed;
             public GameObject meAnimationClose;
+
+            public GameObject distanceToPkayerObj;
         #endregion
 
         #region BOOL
@@ -30,6 +32,7 @@ public class Shelf : MonoBehaviour
             kdAnimation = true;
             if(!isOpen)
             {
+                Debug.Log("тут ниче нет");
                 meClosed.SetActive(false);
                 meAnimationOpen.SetActive(true);
                 meAnimationOpen.GetComponent<Animator>().Play("animationOpen");
@@ -51,6 +54,14 @@ public class Shelf : MonoBehaviour
             {
                 openOrClose();
             }
+
+            // if(name == "open")
+            // {
+            //     if(distanceToPkayerObj.GetComponent<distanceToPkayer>().distance<= 0.8f)
+            //     {
+                    
+            //     }
+            // }
         }
         
 
@@ -58,6 +69,7 @@ public class Shelf : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             meOpenned.SetActive(true);
+            meAnimationOpen.SetActive(false);
             kdAnimation = false;
         }
 
@@ -65,6 +77,7 @@ public class Shelf : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             meClosed.SetActive(true);
+            meAnimationClose.SetActive(false);
             kdAnimation = false;
         }
     #endregion
