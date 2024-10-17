@@ -8,4 +8,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
+<<<<<<< HEAD
+  - enabled: 1
+    path: Assets/_Scenes/Menu.unity
+    guid: f28cfc4a6f134ad48b707632af243bed
+  - enabled: 1
+    path: Assets/_Scenes/MAP.unity
+    guid: eba13cd8857003141a4fd55ba7bace3a
+  - enabled: 1
+    path: Assets/_Scenes/Win.unity
+    guid: 66dc269b1284b364ab4cb645a6271260
+  - enabled: 1
+    path: Assets/_Scenes/Screamer.unity
+    guid: d10f55073d838604ea38ccdc26e56c38
+=======
+>>>>>>> parent of ca99ca5 (адекватное название комита 2)
   m_configObjects: {}

@@ -31,16 +31,6 @@ public class InventoryMain : MonoBehaviour
             #endregion
         #endregion
 
-        #region STRING
-            public string nameCamera;
-            public string nameCandles;
-            public string nameCircle;
-            public string namePapa;
-            public string nameKey;
-            public string nameAxe;
-            public string nameOPickaxe;
-        #endregion
-
         #region INT
             public int indexCamera;
             public int indexCCandles;
@@ -59,7 +49,158 @@ public class InventoryMain : MonoBehaviour
             public GameObject[] imgKey;
             public GameObject[] imgAxe;
             public GameObject[] imgOPickaxe;
+
+            #region current index object
+              public GameObject[] currentObjIndex;
+            #endregion
         #endregion
+
+        #region STRING
+          public string nameObjIndex1;
+          public string nameObjIndex2;
+          public string nameObjIndex3;
+          public string nameObjIndex4;
+          public string nameObjIndex5;
+          public string nameObjIndex6;
+          public string nameObjIndex7;
+
+          public string currnetNameObject;
+        #endregion
+
+        #region ANIMATION
+          public GameObject animationPickCamera;
+          public GameObject atnimationAwayCamera;
+        #endregion
+    #endregion
+
+
+
+    #region СМЕНА ПРЕДМЕТА 
+      void Update()
+      {
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+          if(!isLockIndex1)
+            return;
+            currentObjIndex[0].SetActive(true);
+            currentObjIndex[1].SetActive(false);
+            currentObjIndex[2].SetActive(false);
+            currentObjIndex[3].SetActive(false);
+            currentObjIndex[4].SetActive(false);
+            currentObjIndex[5].SetActive(false);
+            currentObjIndex[6].SetActive(false);
+          if(nameObjIndex1 == "camera")
+          {
+            currnetNameObject = "camera";
+
+            animationPickCamera.SetActive(false);
+            animationPickCamera.SetActive(true);
+            animationPickCamera.GetComponent<Animator>().Play("animationPick");
+          }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+          if(!isLockIndex2)
+            return;
+            currentObjIndex[0].SetActive(false);
+            currentObjIndex[1].SetActive(true);
+            currentObjIndex[2].SetActive(false);
+            currentObjIndex[3].SetActive(false);
+            currentObjIndex[4].SetActive(false);
+            currentObjIndex[5].SetActive(false);
+            currentObjIndex[6].SetActive(false);
+
+            currnetNameObject = nameObjIndex2;
+
+            animationPickCamera.SetActive(false);
+        }
+
+          if(Input.GetKeyDown(KeyCode.Alpha3))
+          {
+          if(!isLockIndex3)
+            return;
+            currentObjIndex[0].SetActive(false);
+            currentObjIndex[1].SetActive(false);
+            currentObjIndex[2].SetActive(true);
+            currentObjIndex[3].SetActive(false);
+            currentObjIndex[4].SetActive(false);
+            currentObjIndex[5].SetActive(false);
+            currentObjIndex[6].SetActive(false);
+
+            currnetNameObject = nameObjIndex3;
+
+            animationPickCamera.SetActive(false);
+          }
+
+          if(Input.GetKeyDown(KeyCode.Alpha4))
+          {
+          if(!isLockIndex4)
+            return;
+            currentObjIndex[0].SetActive(false);
+            currentObjIndex[1].SetActive(false);
+            currentObjIndex[2].SetActive(false);
+            currentObjIndex[3].SetActive(true);
+            currentObjIndex[4].SetActive(false);
+            currentObjIndex[5].SetActive(false);
+            currentObjIndex[6].SetActive(false);
+
+            currnetNameObject = nameObjIndex4;
+
+            animationPickCamera.SetActive(false);
+          }
+
+          if(Input.GetKeyDown(KeyCode.Alpha5))
+          {
+          if(!isLockIndex5)
+            return;
+            currentObjIndex[0].SetActive(false);
+            currentObjIndex[1].SetActive(false);
+            currentObjIndex[2].SetActive(false);
+            currentObjIndex[3].SetActive(false);
+            currentObjIndex[4].SetActive(true);
+            currentObjIndex[5].SetActive(false);
+            currentObjIndex[6].SetActive(false);
+
+            currnetNameObject = nameObjIndex5;
+
+            animationPickCamera.SetActive(false);
+          }
+
+          if(Input.GetKeyDown(KeyCode.Alpha6))
+          {
+          if(!isLockIndex6)
+            return;
+            currentObjIndex[0].SetActive(false);
+            currentObjIndex[1].SetActive(false);
+            currentObjIndex[2].SetActive(false);
+            currentObjIndex[3].SetActive(false);
+            currentObjIndex[4].SetActive(false);
+            currentObjIndex[5].SetActive(true);
+            currentObjIndex[6].SetActive(false);
+
+            currnetNameObject = nameObjIndex6;
+
+            animationPickCamera.SetActive(false);
+          }
+
+          if(Input.GetKeyDown(KeyCode.Alpha7))
+          {
+          if(!isLockIndex7)
+            return;
+            currentObjIndex[0].SetActive(false);
+            currentObjIndex[1].SetActive(false);
+            currentObjIndex[2].SetActive(false);
+            currentObjIndex[3].SetActive(false);
+            currentObjIndex[4].SetActive(false);
+            currentObjIndex[5].SetActive(false);
+            currentObjIndex[6].SetActive(true);
+
+            currnetNameObject = nameObjIndex7;
+
+            animationPickCamera.SetActive(false);
+          }
+        }
     #endregion
 
 
@@ -72,6 +213,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex1 = true;
                     isHaveCamera = true;
+                    nameObjIndex1 = "camera";
                     indexCamera = 1;
                     imgCamera[0].SetActive(true);
                     imgCandles[0].SetActive(false);
@@ -87,6 +229,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex2 = true;
                     isHaveCamera = true;
+                    nameObjIndex2 = "camera";
                     indexCamera = 2;
                       imgCamera[1].SetActive(true);
                      imgCandles[1].SetActive(false);
@@ -102,6 +245,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex3 = true;
                     isHaveCamera = true;
+                    nameObjIndex3 = "camera";
                     indexCamera = 3;
                       imgCamera[2].SetActive(true);
                      imgCandles[2].SetActive(false);
@@ -117,6 +261,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex4 = true;
                     isHaveCamera = true;
+                    nameObjIndex4 = "camera";
                     indexCamera = 4;
                       imgCamera[3].SetActive(true);
                      imgCandles[3].SetActive(false);
@@ -132,6 +277,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex5 = true;
                     isHaveCamera = true;
+                    nameObjIndex5 = "camera";
                     indexCamera = 5;
                       imgCamera[4].SetActive(true);
                      imgCandles[4].SetActive(false);
@@ -147,6 +293,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex6 = true;
                     isHaveCamera = true;
+                    nameObjIndex6 = "camera";
                     indexCamera = 6;
                       imgCamera[5].SetActive(true);
                      imgCandles[5].SetActive(false);
@@ -162,6 +309,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex7 = true;
                     isHaveCamera = true;
+                    nameObjIndex7 = "camera";
                     indexCamera = 7;
                       imgCamera[6].SetActive(true);
                      imgCandles[6].SetActive(false);
@@ -182,6 +330,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex1 = true;
                     isHaveCandles = true;
+                    nameObjIndex1 = "Candles";
                     indexCCandles = 1;
                       imgCamera[0].SetActive(false);
                      imgCandles[0].SetActive(true);
@@ -197,6 +346,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex2 = true;
                     isHaveCandles = true;
+                    nameObjIndex2 = "Candles";
                     indexCCandles = 2;
                       imgCamera[1].SetActive(false);
                      imgCandles[1].SetActive(true);
@@ -212,6 +362,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex3 = true;
                     isHaveCandles = true;
+                    nameObjIndex3 = "Candles";
                     indexCCandles = 3;
                       imgCamera[2].SetActive(false);
                      imgCandles[2].SetActive(true);
@@ -227,6 +378,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex4 = true;
                     isHaveCandles = true;
+                    nameObjIndex4 = "Candles";
                     indexCCandles = 4;
                       imgCamera[3].SetActive(false);
                      imgCandles[3].SetActive(true);
@@ -242,6 +394,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex5 = true;
                     isHaveCandles = true;
+                    nameObjIndex5 = "Candles";
                     indexCCandles = 5;
                       imgCamera[4].SetActive(false);
                      imgCandles[4].SetActive(true);
@@ -257,6 +410,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex6 = true;
                     isHaveCandles = true;
+                    nameObjIndex6 = "Candles";
                     indexCCandles = 6;
                       imgCamera[5].SetActive(false);
                      imgCandles[5].SetActive(true);
@@ -272,6 +426,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex7 = true;
                     isHaveCandles = true;
+                    nameObjIndex7 = "Candles";
                     indexCCandles = 7;
                       imgCamera[6].SetActive(false);
                      imgCandles[6].SetActive(true);
@@ -292,6 +447,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex1 = true;
                     isHaveCircle = true;
+                    nameObjIndex1 = "Circle";
                     indexCircle = 1;
                       imgCamera[0].SetActive(false);
                      imgCandles[0].SetActive(false);
@@ -307,6 +463,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex2 = true;
                     isHaveCircle = true;
+                    nameObjIndex2 = "Circle";
                     indexCircle = 2;
                       imgCamera[1].SetActive(false);
                      imgCandles[1].SetActive(false);
@@ -322,6 +479,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex3 = true;
                     isHaveCircle = true;
+                    nameObjIndex3 = "Circle";
                     indexCircle = 3;
                       imgCamera[2].SetActive(false);
                      imgCandles[2].SetActive(false);
@@ -337,6 +495,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex4 = true;
                     isHaveCircle = true;
+                    nameObjIndex4 = "Circle";
                     indexCircle = 4;
                       imgCamera[3].SetActive(false);
                      imgCandles[3].SetActive(false);
@@ -352,6 +511,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex5 = true;
                     isHaveCircle = true;
+                    nameObjIndex5 = "Circle";
                     indexCircle = 5;
                       imgCamera[4].SetActive(false);
                      imgCandles[4].SetActive(false);
@@ -367,6 +527,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex6 = true;
                     isHaveCircle = true;
+                    nameObjIndex6 = "Circle";
                     indexCircle = 6;
                       imgCamera[5].SetActive(false);
                      imgCandles[5].SetActive(false);
@@ -382,6 +543,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex7 = true;
                     isHaveCircle = true;
+                    nameObjIndex7 = "Circle";
                     indexCircle = 7;
                       imgCamera[6].SetActive(false);
                      imgCandles[6].SetActive(false);
@@ -402,6 +564,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex1 = true;
                     isHavePapa = true;
+                    nameObjIndex1 = "Scull";
                     indexPapa = 1;
                       imgCamera[0].SetActive(false);
                      imgCandles[0].SetActive(false);
@@ -417,6 +580,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex2 = true;
                     isHavePapa = true;
+                    nameObjIndex2 = "Scull";
                     indexPapa = 2;
                       imgCamera[1].SetActive(false);
                      imgCandles[1].SetActive(false);
@@ -432,6 +596,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex3 = true;
                     isHavePapa = true;
+                    nameObjIndex3 = "Scull";
                     indexPapa = 3;
                       imgCamera[2].SetActive(false);
                      imgCandles[2].SetActive(false);
@@ -447,6 +612,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex4 = true;
                     isHavePapa = true;
+                    nameObjIndex4 = "Scull";
                     indexPapa = 4;
                       imgCamera[3].SetActive(false);
                      imgCandles[3].SetActive(false);
@@ -462,6 +628,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex5 = true;
                     isHavePapa = true;
+                    nameObjIndex5 = "Scull";
                     indexPapa = 5;
                       imgCamera[4].SetActive(false);
                      imgCandles[4].SetActive(false);
@@ -477,6 +644,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex6 = true;
                     isHavePapa = true;
+                    nameObjIndex6 = "Scull";
                     indexPapa = 6;
                       imgCamera[5].SetActive(false);
                      imgCandles[5].SetActive(false);
@@ -492,6 +660,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex7 = true;
                     isHavePapa = true;
+                    nameObjIndex7 = "Scull";
                     indexPapa = 7;
                       imgCamera[6].SetActive(false);
                      imgCandles[6].SetActive(false);
@@ -512,6 +681,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex1 = true;
                     isHaveKey = true;
+                    nameObjIndex1 = "Key";
                     indexKey = 1;
                       imgCamera[0].SetActive(false);
                      imgCandles[0].SetActive(false);
@@ -527,6 +697,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex2 = true;
                     isHaveKey = true;
+                    nameObjIndex2 = "Key";
                     indexKey = 2;
                       imgCamera[1].SetActive(false);
                      imgCandles[1].SetActive(false);
@@ -542,6 +713,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex3 = true;
                     isHaveKey = true;
+                    nameObjIndex3 = "Key";
                     indexKey = 3;
                       imgCamera[2].SetActive(false);
                      imgCandles[2].SetActive(false);
@@ -557,6 +729,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex4 = true;
                     isHaveKey = true;
+                    nameObjIndex4 = "Key";
                     indexKey = 4;
                       imgCamera[3].SetActive(false);
                      imgCandles[3].SetActive(false);
@@ -572,6 +745,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex5 = true;
                     isHaveKey = true;
+                    nameObjIndex5 = "Key";
                     indexKey = 5;
                       imgCamera[4].SetActive(false);
                      imgCandles[4].SetActive(false);
@@ -587,6 +761,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex6 = true;
                     isHaveKey = true;
+                    nameObjIndex6 = "Key";
                     indexKey = 6;
                       imgCamera[5].SetActive(false);
                      imgCandles[5].SetActive(false);
@@ -602,6 +777,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex7 = true;
                     isHaveKey = true;
+                    nameObjIndex7 = "Key";
                     indexKey = 7;
                       imgCamera[6].SetActive(false);
                      imgCandles[6].SetActive(false);
@@ -622,6 +798,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex1 = true;
                     isHaveAxe = true;
+                    nameObjIndex1 = "Axe";
                     indexAxe = 1;
                       imgCamera[0].SetActive(false);
                      imgCandles[0].SetActive(false);
@@ -637,6 +814,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex2 = true;
                     isHaveAxe = true;
+                    nameObjIndex2 = "Axe";
                     indexAxe = 2;
                       imgCamera[1].SetActive(false);
                      imgCandles[1].SetActive(false);
@@ -652,6 +830,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex3 = true;
                     isHaveAxe = true;
+                    nameObjIndex3 = "Axe";
                     indexAxe = 3;
                       imgCamera[2].SetActive(false);
                      imgCandles[2].SetActive(false);
@@ -667,6 +846,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex4 = true;
                     isHaveAxe = true;
+                    nameObjIndex4 = "Axe";
                     indexAxe = 4;
                       imgCamera[3].SetActive(false);
                      imgCandles[3].SetActive(false);
@@ -682,6 +862,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex5 = true;
                     isHaveAxe = true;
+                    nameObjIndex5 = "Axe";
                     indexAxe = 5;
                       imgCamera[4].SetActive(false);
                      imgCandles[4].SetActive(false);
@@ -697,6 +878,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex6 = true;
                     isHaveAxe = true;
+                    nameObjIndex6 = "Axe";
                     indexAxe = 6;
                       imgCamera[5].SetActive(false);
                      imgCandles[5].SetActive(false);
@@ -712,6 +894,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex7 = true;
                     isHaveAxe = true;
+                    nameObjIndex7 = "Axe";
                     indexAxe = 7;
                       imgCamera[6].SetActive(false);
                      imgCandles[6].SetActive(false);
@@ -732,6 +915,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex1 = true;
                     isHavePickaxe = true;
+                    nameObjIndex1 = "Pickaxe";
                     indexPickaxe = 1;
                       imgCamera[0].SetActive(false);
                      imgCandles[0].SetActive(false);
@@ -747,6 +931,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex2 = true;
                     isHavePickaxe = true;
+                    nameObjIndex2 = "Pickaxe";
                     indexPickaxe = 2;
                       imgCamera[1].SetActive(false);
                      imgCandles[1].SetActive(false);
@@ -762,6 +947,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex3 = true;
                     isHavePickaxe = true;
+                    nameObjIndex3 = "Pickaxe";
                     indexPickaxe = 3;
                       imgCamera[2].SetActive(false);
                      imgCandles[2].SetActive(false);
@@ -777,6 +963,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex4 = true;
                     isHavePickaxe = true;
+                    nameObjIndex4 = "Pickaxe";
                     indexPickaxe = 4;
                       imgCamera[3].SetActive(false);
                      imgCandles[3].SetActive(false);
@@ -792,6 +979,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex5 = true;
                     isHavePickaxe = true;
+                    nameObjIndex5 = "Pickaxe";
                     indexPickaxe = 5;
                       imgCamera[4].SetActive(false);
                      imgCandles[4].SetActive(false);
@@ -807,6 +995,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex6 = true;
                     isHavePickaxe = true;
+                    nameObjIndex6 = "Pickaxe";
                     indexPickaxe = 6;
                       imgCamera[5].SetActive(false);
                      imgCandles[5].SetActive(false);
@@ -822,6 +1011,7 @@ public class InventoryMain : MonoBehaviour
                 {
                     isLockIndex7 = true;
                     isHavePickaxe = true;
+                    nameObjIndex7 = "Pickaxe";
                     indexPickaxe = 7;
                       imgCamera[6].SetActive(false);
                      imgCandles[6].SetActive(false);

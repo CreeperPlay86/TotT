@@ -72,7 +72,7 @@ public class PhotoApparat : MonoBehaviour
                     animationWalkEnemy.SetActive(true);
                     animationStunEnemy.SetActive(false);
                     enemy.GetComponent<EnemyAIGame>().takePicture = false;
-                yield return new WaitForSeconds(7);
+                yield return new WaitForSeconds(4);
                 goPicture = true;
             }
         }

@@ -29,6 +29,15 @@ public class PlayerControllerMain : MonoBehaviour
                 #endregion
 
             public GameObject animationHands;
+<<<<<<< Updated upstream
+=======
+
+            public Transform locationCircle;
+
+            public GameObject circleFull;
+            
+            public GameObject[] delatsCircle;
+>>>>>>> Stashed changes
         #endregion
 
         #region FLOAT
@@ -49,6 +58,13 @@ public class PlayerControllerMain : MonoBehaviour
             public bool inTheWardrobe;
 
             public bool haveAxe;
+<<<<<<< Updated upstream
+=======
+
+            public bool iHave3lvl;
+
+            public bool goBuildCircle;
+>>>>>>> Stashed changes
         #endregion
 
         #region CONNECT
@@ -109,6 +125,10 @@ public class PlayerControllerMain : MonoBehaviour
                 //clickLkmUI.SetActive(true);
                 if(Input.GetMouseButtonDown(0))
                 {
+<<<<<<< HEAD
+                    cameraInt++;
+=======
+>>>>>>> parent of ca99ca5 (адекватное название комита 2)
                     inv.plusObjCamera();
                     Destroy(hit.collider.gameObject);
                 }
@@ -118,6 +138,10 @@ public class PlayerControllerMain : MonoBehaviour
             {
                 if(Input.GetMouseButtonDown(0))
                 {
+<<<<<<< HEAD
+                    key++;
+=======
+>>>>>>> parent of ca99ca5 (адекватное название комита 2)
                     inv.plusObjKey();
                     Destroy(hit.collider.gameObject);
                 }
@@ -180,6 +204,139 @@ public class PlayerControllerMain : MonoBehaviour
                     gameObject.GetComponent<PlayerMovementGAME>().isActiveAudio = true;
                 }
             }
+<<<<<<< HEAD
+
+            if(hit.collider.tag == "pickAxe")
+            {
+                //clickLkmUI.SetActive(true);
+                if(Input.GetMouseButtonDown(0))
+                {
+                    pickAxe++;
+                    inv.plusObjPickAxe();
+                    Destroy(hit.collider.gameObject);
+                }
+            }
+
+            if(hit.collider.tag == "candles")
+            {
+                if(Input.GetMouseButtonDown(0))
+                {
+                    candles++;
+                    if(inv.isHaveCandles==false)
+                        inv.plusObjCandles();
+                    Destroy(hit.collider.gameObject);
+                }
+            }
+
+            if(hit.collider.tag == "scull")
+            {
+                if(Input.GetMouseButtonDown(0))
+                {scull++;
+                inv.plusObjPapa();
+                Destroy(hit.collider.gameObject);}
+            }
+
+            if(hit.collider.tag == "fragments")
+            {
+                if(Input.GetMouseButtonDown(0))
+                {
+                    fragments++;
+                    if(inv.isHaveCircle==false)
+                    inv.plusObjCircle();
+                    Destroy(hit.collider.gameObject);
+                }
+            }
+
+            if(hit.collider.tag == "fullCircle")
+            {
+                if(goBuildCircle)
+                {
+                    if(Input.GetMouseButtonDown(0))
+                    {
+                        if(fragments != 0)
+                        {
+                            if(fragments == 6)
+                                delatsCircle[0].SetActive(true);
+                            if(fragments == 5)
+                                delatsCircle[1].SetActive(true);
+                            if(fragments == 4)
+                                delatsCircle[2].SetActive(true);
+                            if(fragments == 3)
+                                delatsCircle[3].SetActive(true);
+                            if(fragments == 2)
+                                delatsCircle[4].SetActive(true);
+                            if(fragments == 1)
+                                delatsCircle[5].SetActive(true);
+                            fragments--;
+                            return;
+                        }
+                        if(candles != 0)
+                        {
+                            if(candles == 5)
+                            
+                            candles--;
+                            return;
+                        }
+                        if(scull != 0)
+                        {
+                            scull--;
+                            return;
+                        }
+                        if(scull == 0 && candles == 0 && fragments == 0)
+                        {
+                            SceneManager.LoadScene("Win");
+                        }
+                    }
+                }
+            }
+
+            if(fragments >= 6 && candles >= 5 && scull >= 1)
+            {
+                level = 3;
+            }
+
+           // if(hit.collider.tag == "circle" && distanceToCircle <= 1.5f)
+           // {
+           //    //clickLkmUI.SetActive(true); 
+           //    if(Input.GetMouseButtonDown(0))
+           //     {
+           //         if(fragments != 0)
+           //         {
+           //             
+           //             fragments--;
+           //             return;
+           //         }
+           //         if(candles != 0)
+           //         {
+           //             candles--;
+           //             return;
+           //         }
+           //         if(scull != 0)
+           //         {
+           //             scull--;
+           //             return;
+           //         }
+           //         if(scull == 0 && candles == 0 && fragments == 0)
+           //         {
+           //             SceneManager.LoadScene("Win");
+           //         }
+           //     }
+           // }
+        }
+
+        if(_progress.progress >= 3)
+        {
+<<<<<<< Updated upstream
+            distanceToCircle = Vector3.Distance(transform.position, locationCircle.position);
+        }
+        else
+        {
+            distanceToCircle = 1500f;
+=======
+>>>>>>> parent of ca99ca5 (адекватное название комита 2)
+=======
+            goBuildCircle = true;
+>>>>>>> Stashed changes
         }
     }
 
@@ -188,7 +345,11 @@ public class PlayerControllerMain : MonoBehaviour
     #region VOID and IE
         private void OnTriggerEnter(Collider obj)
         {
+<<<<<<< HEAD
+            if(obj.gameObject.tag == "doorPapa")
+=======
             if(obj.gameObject.tag == "tagActiveEnemy")
+>>>>>>> parent of ca99ca5 (адекватное название комита 2)
             {
                 enemy.SetActive(true);
                     #region SOUND
