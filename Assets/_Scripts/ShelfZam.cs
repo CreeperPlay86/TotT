@@ -6,15 +6,14 @@ public class ShelfZam : MonoBehaviour
 {
     #region DATA
         #region CONNECT
-            public GameObject myOwner;
+            public GameObject meOwner;
         #endregion
     #endregion
 
     #region VOID
-        public void doing()
+        public void do()
         {
-            myOwner.GetComponent<Shelf>().openOrClose();
-            Debug.Log("тут тоже че то есть");
+            meOwner.GetComponent<>;
         }
     #endregion
 }
